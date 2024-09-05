@@ -7,9 +7,9 @@ format:
     slide-number: true
     smaller: true
     center: true
-    logo: ../img/UBC-CS-logo.png
+    logo: img/UBC-CS-logo.png
     resources:
-      - ../data/
+      - data/
       - img/
 ---
 
@@ -63,7 +63,7 @@ From this lecture, you will be able to
 ::: {.column width="80%"}
 - Varada Kolhatkar [[ʋəɾəda kɔːlɦəʈkər](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)]
 - You can call me Varada, **V**, or **Ada**.
-- I am an Assistant Professor of Teaching in Computer Science.
+- I am an Assistant Professor of Teaching in the Department of Computer Science.
 - I did my Ph.D. in Computational Linguistics at the University of Toronto. 
 - I primarily teach machine learning courses in the [Master of Data Science (MDS) program](https://masterdatascience.ubc.ca/). 
 - Contact information
@@ -78,7 +78,7 @@ From this lecture, you will be able to
 :::: {.columns}
 
 ::: {.column width="40%"}
-![](../img/eva-hi.png)
+![](img/eva-hi.png)
 :::
 
 ::: {.column width="60%"}
@@ -97,14 +97,87 @@ Eva is among one of you. She has some experience in Python programming. She know
 You are welcome to ask questions by raising your hand.
 There is also [a reflection Google Document](https://docs.google.com/document/d/1q9peVKhyoVhrmZ9Afk4LOGlVJA3GXStuVKQWVQDOG2o/edit?usp=sharing) for this course for your questions/comments/reflections. It will be great if you can write about your takeaways, struggle points, and general comments in this document so that I'll try to address those points in the next lecture. 
 
-## Activity 1
+
+## Activity 1: https://shorturl.at/CteOU
 \
+
+- Write your answers to the questions below in this Google doc: https://shorturl.at/CteOU
 
 * What do you know about machine learning?
 * What would you like to get out this course?
 * Are there any particular topics or aspects of this course that you are especially excited or anxious about? Why?
 
-## What is Machine Learning (ML)?
+
+# What is Machine Learning (ML)?
+
+## Spam prediction 
+
+- Suppose you are given some data with labeled spam and non-spam messages 
+
+::: panel-tabset
+### Code
+
+```{python}
+#| echo: true
+sms_df = pd.read_csv(DATA_DIR + "spam.csv", encoding="latin-1")
+sms_df = sms_df.drop(columns = ["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"])
+sms_df = sms_df.rename(columns={"v1": "target", "v2": "sms"})
+train_df, test_df = train_test_split(sms_df, test_size=0.10, random_state=42)
+```
+
+### Output
+
+::: {.scroll-container style="overflow-y: scroll; height: 400px;"}
+```{python}
+HTML(train_df.head().to_html(index=False))
+```
+:::
+
+:::
+
+## Traditional programming vs. ML
+
+- Imagine writing a Python program for spam identification, i.e., whether a text message or an email is spam or non-spam. 
+- Traditional programming 
+    - Come up with rules using human understanding of spam messages. 
+    - Time consuming and hard to come up with robust set of rules. 
+- Machine learning
+    - Collect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules. 
+
+## Let's train a model 
+
+- There are several packages that help us perform machine learning.
+
+```{python}
+#| echo: true
+X_train, y_train = train_df["sms"], train_df["target"]
+X_test, y_test = test_df["sms"], test_df["target"]
+clf = make_pipeline(CountVectorizer(max_features=5000), LogisticRegression(max_iter=5000))
+clf.fit(X_train, y_train); # Training the model
+```
+
+## Unseen messages
+
+- Now use the trained model to predict targets of unseen messages:
+
+```{python}
+pd.DataFrame(X_test[0:4])
+```
+
+## Predicting on unseen data {.smaller}
+
+**The model is accurately predicting labels for the unseen text messages above!**
+
+```{python}
+pred_dict = {
+    "sms": X_test[0:4],
+    "spam_predictions": clf.predict(X_test[0:4]),
+}
+pred_df = pd.DataFrame(pred_dict)
+pred_df.style.set_properties(**{"text-align": "left"})
+```
+
+## A different way to solve problems 
 
 Machine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.   
 
@@ -112,30 +185,21 @@ Machine learning uses computer programs to model data. It can be used to extract
 A field of study that gives computers the ability to learn without being explicitly programmed. <br> -- Arthur Samuel (1959)
 </blockquote>
 
-ML is a different way to think about problem solving. 
 
 ## ML vs. traditional programming
 
-![](../img/traditional-programming-vs-ML.png){.nostretch fig-align="center" width="500px"}
+- With machine learning, you're likely to 
+    - Save time 
+    - Customize and scale products 
+
+![](img/traditional-programming-vs-ML.png){.nostretch fig-align="center" width="500px"}
 
 ## Prevalence of ML
 
 Let's look at some examples. 
 
 <!-- <img src="img/ml-examples.png" height="1000" width="1000">  -->
-![](../img/ml-examples.png)
-
-## Saving time and scaling products 
-
-- Imagine writing a program for spam identification, i.e., whether an email is spam or non-spam. 
-- Traditional programming 
-    - Come up with rules using human understanding of spam messages. 
-    - Time consuming and hard to come up with robust set of rules. 
-- Machine learning
-    - Collect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules. 
-- With machine learning, you're likely to 
-    - Save time 
-    - Customize and scale products 
+![](img/ml-examples.png)
 
 ## Activity: For what type of problems ML is appropriate? (~5 mins)
 
@@ -164,64 +228,8 @@ Here are some typical learning problems.
 - We wish to find a model function $f$ that relates $X$ to $y$.
 - We use the model function to predict targets of new examples. 
 
-![](../img/sup-learning.png){.nostretch fig-align="center" width="700px"}
+![](img/sup-learning.png){.nostretch fig-align="center" width="700px"}
 
-## Example: Predict whether a message is spam or not 
-
-- Suppose you are given the input features $X$ (`sms`) and target $y$ (`target`) below. 
-
-::: panel-tabset
-### Code
-
-```{python}
-#| echo: true
-sms_df = pd.read_csv(DATA_DIR + "spam.csv", encoding="latin-1")
-sms_df = sms_df.drop(columns = ["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"])
-sms_df = sms_df.rename(columns={"v1": "target", "v2": "sms"})
-train_df, test_df = train_test_split(sms_df, test_size=0.10, random_state=42)
-```
-
-### Output
-
-```{python}
-HTML(train_df.head().to_html(index=False))
-```
-
-:::
-
-## Let's train a model 
-
-- There are several packages that help us perform machine learning.
-- Let's train a model to learn the mapping function between `X` and `y` using a package called `sklearn`.
-
-```{python}
-#| echo: true
-X_train, y_train = train_df["sms"], train_df["target"]
-X_test, y_test = test_df["sms"], test_df["target"]
-clf = make_pipeline(CountVectorizer(max_features=5000), LogisticRegression(max_iter=5000))
-clf.fit(X_train, y_train); # Training the model
-```
-
-## Unseen messages
-
-- Now use the trained model to predict targets of unseen messages:
-
-```{python}
-pd.DataFrame(X_test[0:4])
-```
-
-## Predicting on unseen data using the trained model{.smaller}
-
-**The model is accurately predicting labels for the unseen text messages above!**
-
-```{python}
-pred_dict = {
-    "sms": X_test[0:4],
-    "spam_predictions": clf.predict(X_test[0:4]),
-}
-pred_df = pd.DataFrame(pred_dict)
-pred_df.style.set_properties(**{"text-align": "left"})
-```
 
 ## 🤔 Eva's questions
 \
@@ -229,7 +237,6 @@ pred_df.style.set_properties(**{"text-align": "left"})
 At this point, Eva is wondering about many questions. 
 
 - How are we exactly "learning" whether a message is spam and ham? 
-- What do you mean by "learn without being explicitly programmed"? The code has to be somewhere ... 
 - Are we expected to get correct predictions for all possible messages? How does it predict the label for a message it has not seen before?  
 - What if the model mis-labels an unseen example? For instance, what if the model incorrectly predicts a non-spam as a spam? What would be the consequences? 
 - How do we measure the success or failure of spam identification? 
@@ -306,7 +313,7 @@ We are predicting continuous values here as apposed to discrete values in `spam`
 
 Supervised machine learning is quite flexible; it can be used on a variety of problems and different kinds of data. Here is a typical workflow of a supervised machine learning systems.  
 
-![](../img/ml-workflow.png){.nostretch fig-align="center" width="700px"}
+![](img/ml-workflow.png){.nostretch fig-align="center" width="700px"}
 
 <!-- <img src="img/ml-workflow.png" height="800" width="800">  -->
 
@@ -316,7 +323,7 @@ We will build machine learning pipelines in this course, focusing on some of the
 
 ## ❓❓ Questions for you
 
-iClicker cloud join link: 
+iClicker cloud join link: https://join.iclicker.com/VYFJ
 
 ### Select all of the following statements which are **True** (iClicker)
 
@@ -327,7 +334,7 @@ iClicker cloud join link:
 - (E) Google News is likely be using machine learning to organize news. 
 <br><br><br><br>
 
-## Surveys (~8 min)
+## Surveys
 
 - Please complete the "Getting to know you" survey on [Canvas]().
 - Also, please complete the anonymous restaurant survey on Qualtrics [here](https://ubc.ca1.qualtrics.com/jfe/form/SV_73VuZiuwM1eDVrw).
@@ -340,7 +347,7 @@ Course website: [https://github.com/UBC-CS/cpsc330-2024W1](https://github.com/UB
 :::
 
 ::: {.callout-important}
-The [Syllabus quiz](https://canvas.ubc.ca/courses/149122/quizzes) available on Canvas, Due: Monday, Sept 19th at 11:59pm. 
+Make sure you go through the syllabus thoroughly and complete the syllabus quiz before Monday, Sept 19th at 11:59pm. 
 :::
 
 ## CPSC 330 vs. 340
@@ -362,13 +369,13 @@ which explains the difference between two courses.
 Please go through [this document](https://github.com/UBC-CS/cpsc330-2024W1/blob/master/docs/course_info.md#registration) carefully before contacting your instructors about these issues. Even then, we are very unlikely to be able to help with registration, waitlist or prerequisite issues.
 :::
 
-- If you are on waitlist and if you'd like to try your chances, you should be able to access [Canvas](https://canvas.ubc.ca/courses/149122) to do the syllabus quiz and homework assignments. 
-- If you're unable to make it this time, there will be two sections of this course offered next semester and then again in the summer
+- If you are on waitlist and if you'd like to try your chances, you should be able to access [Canvas](https://canvas.ubc.ca/courses/149122) and Piazza.  
+- If you're unable to make it this time, there will be two sections of this course offered next semester and then again in the summer.
 
 ## Lecture format
 
 - In person lectures T/Th.
-- Sometimes there will be videos to watch before or during the lecture time. You will find the list of pre-watch videos in the schedule on the course webpage.
+- Sometimes there will be videos to watch before lecture. You will find the list of pre-watch videos in the schedule on the course webpage.
 - We will also try to work on some questions and exercises together during the class. 
 - All materials will be posted in this GitHub repository. 
 - Weekly tutorials will be **office hour format** run by the TAs and are **completely optional**.
@@ -376,9 +383,8 @@ Please go through [this document](https://github.com/UBC-CS/cpsc330-2024W1/blob/
   - You can attend whatever tutorials or office hours your want, regardless of in which/whether you're registered.
 
 ## Home work assignments
-- First homework assignment is due **this coming Monday**, September 09, midnight. This is a relatively straightforward assignment on Python. If you struggle with this assignment then that could be a sign that you will struggle later on in the course.    
+- First homework assignment is due **this coming Tuesday**, September 10, midnight. This is a relatively straightforward assignment on Python. If you struggle with this assignment then that could be a sign that you will struggle later on in the course.    
 - You must do the first two homework assignments on your own.
-- I'm hoping you'll be able to work with partners on subsequent assignments. 
 
 ## Exams 
 
@@ -452,6 +458,8 @@ x
 - We cannot promise anything will stay the same from last year to this year, so read them in advance at your own risk.
 - A "finalized" version will be pushed to [GitHub](https://github.com/UBC-CS/cpsc330-2024W1) and the [Jupyter book](https://ubc-cs.github.io/cpsc330-2024W1/README.html) right before each class.
 - Each instructor will have slightly adapted versions of notes to present slides during lectures.  
+- You will find the link to these slides in our repository: 
+https://github.com/UBC-CS/cpsc330-2024W1/tree/main/lectures/102-Varada-lectures
 
 ## Grades
 
@@ -460,9 +468,7 @@ x
 
 # Setting up your computer for the course 
 
-## Recommended browser
-
-- I'll test the course notebooks and exams, which we'll be doing via [Canvas](https://canvas.ubc.ca/courses/149122), on the following two browsers: Chrome and Firefox. So I recommend that you use one of these browsers for the course.
+## Recommended browser and tools
 
 - You can install Chrome [here](https://www.google.com/chrome/).
 - You can install Firefox [here](https://www.mozilla.org/en-US/firefox/new/). 
@@ -500,9 +506,8 @@ but you can find some useful Python resources [here](https://github.com/UBC-CS/c
 - [ ] Are you able to access course [Canvas](https://canvas.ubc.ca/courses/149122) shell? 
 - [ ] Are you able to access [course Piazza](https://piazza.com/ubc.ca/winterterm12024/cpsc_v3301011021032024w1)?
 - [ ] Are you able to access [Gradescope](https://www.gradescope.ca/courses/18608)? (If not, refer to the [Gradescope Student Guide](https://lthub.ubc.ca/guides/gradescope-student-guide/).)
-- [ ] Are you able to access [iClicker Cloud]() for this course?
+- [ ] Are you able to access [iClicker Cloud](https://join.iclicker.com/VYFJ) for this course?
 - [ ] Did you follow the setup instructions [here](https://ubc-cs.github.io/cpsc330-2024W1/docs/setup.html) to create a course conda environment on your computer?
 - [ ] Did you complete the "Getting to know you" survey on Canvas?
 - [ ] Did you complete the anonymous [restaurant survey on Qualtrics](https://ubc.ca1.qualtrics.com/jfe/form/SV_73VuZiuwM1eDVrw)?
-- [ ] Did you complete the syllabus quiz on Canvas? 
 - [ ] Are you almost finished or at least started with homework 1?
