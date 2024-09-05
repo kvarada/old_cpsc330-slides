@@ -439,7 +439,7 @@
 <ul>
 <li>Varada Kolhatkar [<a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">ʋəɾəda kɔːlɦəʈkər</a>]</li>
 <li>You can call me Varada, <strong>V</strong>, or <strong>Ada</strong>.</li>
-<li>I am an Assistant Professor of Teaching in Computer Science.</li>
+<li>I am an Assistant Professor of Teaching in the Department of Computer Science.</li>
 <li>I did my Ph.D.&nbsp;in Computational Linguistics at the University of Toronto.</li>
 <li>I primarily teach machine learning courses in the <a href="https://masterdatascience.ubc.ca/">Master of Data Science (MDS) program</a>.</li>
 <li>Contact information
@@ -480,104 +480,22 @@
 <li>What would you like to get out this course?</li>
 <li>Are there any particular topics or aspects of this course that you are especially excited or anxious about? Why?</li>
 </ul>
-</section>
-<section id="what-is-machine-learning-ml" class="slide level2 center">
-<h2>What is Machine Learning (ML)?</h2>
-<p>Machine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.</p>
-<blockquote>
-A field of study that gives computers the ability to learn without being explicitly programmed. <br> – Arthur Samuel (1959)
-</blockquote>
-<p>ML is a different way to think about problem solving.</p>
-</section>
-<section id="ml-vs.-traditional-programming" class="slide level2 center">
-<h2>ML vs.&nbsp;traditional programming</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../img/traditional-programming-vs-ML.png" class="quarto-figure quarto-figure-center" width="500"></p>
-</figure>
-</div>
-</section>
-<section id="prevalence-of-ml" class="slide level2 center">
-<h2>Prevalence of ML</h2>
-<p>Let’s look at some examples.</p>
-<!-- <img src="img/ml-examples.png" height="1000" width="1000">  -->
+</section></section>
+<section>
+<section id="what-is-machine-learning-ml" class="title-slide slide level1 center">
+<h1>What is Machine Learning (ML)?</h1>
 
-<img data-src="../img/ml-examples.png" class="r-stretch"></section>
-<section id="saving-time-and-scaling-products" class="slide level2 center">
-<h2>Saving time and scaling products</h2>
-<ul>
-<li>Imagine writing a program for spam identification, i.e., whether an email is spam or non-spam.</li>
-<li>Traditional programming
-<ul>
-<li>Come up with rules using human understanding of spam messages.</li>
-<li>Time consuming and hard to come up with robust set of rules.</li>
-</ul></li>
-<li>Machine learning
-<ul>
-<li>Collect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.</li>
-</ul></li>
-<li>With machine learning, you’re likely to
-<ul>
-<li>Save time</li>
-<li>Customize and scale products</li>
-</ul></li>
-</ul>
 </section>
-<section id="activity-for-what-type-of-problems-ml-is-appropriate-5-mins" class="slide level2 center">
-<h2>Activity: For what type of problems ML is appropriate? (~5 mins)</h2>
-<p>Discuss with your neighbour for which of the following problems you would use machine learning</p>
+<section id="spam-prediction" class="slide level2 center">
+<h2>Spam prediction</h2>
 <ul>
-<li>Finding a list of prime numbers up to a limit</li>
-<li>Given an image, automatically identifying and labeling objects in the image</li>
-<li>Finding the distance between two nodes in a graph</li>
-</ul>
-</section>
-<section id="types-of-machine-learning" class="slide level2 center">
-<h2>Types of machine learning</h2>
-<p>Here are some typical learning problems.</p>
-<ul>
-<li><strong>Supervised learning</strong> (<a href="https://support.google.com/a/answer/2368132?hl=en">Gmail spam filtering</a>)
-<ul>
-<li>Training a model from input data and its corresponding targets to predict targets for new examples.<br>
-</li>
-</ul></li>
-<li>Unsupervised learning (<a href="https://news.google.com/">Google News</a>)
-<ul>
-<li>Training a model to find patterns in a dataset, typically an unlabeled dataset.</li>
-</ul></li>
-<li>Reinforcement learning (<a href="https://deepmind.com/research/case-studies/alphago-the-story-so-far">AlphaGo</a>)
-<ul>
-<li>A family of algorithms for finding suitable actions to take in a given situation in order to maximize a reward.</li>
-</ul></li>
-<li>Recommendation systems (<a href="https://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf">Amazon item recommendation system</a>)
-<ul>
-<li>Predict the “rating” or “preference” a user would give to an item.</li>
-</ul></li>
-</ul>
-</section>
-<section id="what-is-supervised-learning" class="slide level2 center">
-<h2>What is supervised learning?</h2>
-<ul>
-<li>Training data comprises a set of observations (<span class="math inline">\(X\)</span>) and their corresponding targets (<span class="math inline">\(y\)</span>).</li>
-<li>We wish to find a model function <span class="math inline">\(f\)</span> that relates <span class="math inline">\(X\)</span> to <span class="math inline">\(y\)</span>.</li>
-<li>We use the model function to predict targets of new examples.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../img/sup-learning.png" class="quarto-figure quarto-figure-center" width="700"></p>
-</figure>
-</div>
-</section>
-<section id="example-predict-whether-a-message-is-spam-or-not" class="slide level2 center">
-<h2>Example: Predict whether a message is spam or not</h2>
-<ul>
-<li>Suppose you are given the input features <span class="math inline">\(X\)</span> (<code>sms</code>) and target <span class="math inline">\(y\)</span> (<code>target</code>) below.</li>
+<li>Suppose you are given some data with labeled spam and non-spam messages</li>
 </ul>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Output</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div id="50153de5" class="cell" data-execution_count="2">
+<div id="d227fe3d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>sms_df <span class="op">=</span> pd.read_csv(DATA_DIR <span class="op">+</span> <span class="st">"spam.csv"</span>, encoding<span class="op">=</span><span class="st">"latin-1"</span>)</span>
 <span id="cb1-2"><a></a>sms_df <span class="op">=</span> sms_df.drop(columns <span class="op">=</span> [<span class="st">"Unnamed: 2"</span>, <span class="st">"Unnamed: 3"</span>, <span class="st">"Unnamed: 4"</span>])</span>
 <span id="cb1-3"><a></a>sms_df <span class="op">=</span> sms_df.rename(columns<span class="op">=</span>{<span class="st">"v1"</span>: <span class="st">"target"</span>, <span class="st">"v2"</span>: <span class="st">"sms"</span>})</span>
@@ -585,8 +503,9 @@ A field of study that gives computers the ability to learn without being explici
 </div>
 </div>
 <div id="tabset-1-2">
-<div id="c26ff36d" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="scroll-container" style="overflow-y: scroll; height: 400px;">
+<div id="0dad5b7e" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
@@ -622,14 +541,29 @@ A field of study that gives computers the ability to learn without being explici
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="traditional-programming-vs.-ml" class="slide level2 center">
+<h2>Traditional programming vs.&nbsp;ML</h2>
+<ul>
+<li>Imagine writing a Python program for spam identification, i.e., whether an email is spam or non-spam.</li>
+<li>Traditional programming
+<ul>
+<li>Come up with rules using human understanding of spam messages.</li>
+<li>Time consuming and hard to come up with robust set of rules.</li>
+</ul></li>
+<li>Machine learning
+<ul>
+<li>Collect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.</li>
+</ul></li>
+</ul>
 </section>
 <section id="lets-train-a-model" class="slide level2 center">
 <h2>Let’s train a model</h2>
 <ul>
 <li>There are several packages that help us perform machine learning.</li>
-<li>Let’s train a model to learn the mapping function between <code>X</code> and <code>y</code> using a package called <code>sklearn</code>.</li>
 </ul>
-<div id="e8d1099c" class="cell" data-execution_count="4">
+<div id="428b0269" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>X_train, y_train <span class="op">=</span> train_df[<span class="st">"sms"</span>], train_df[<span class="st">"target"</span>]</span>
 <span id="cb2-2"><a></a>X_test, y_test <span class="op">=</span> test_df[<span class="st">"sms"</span>], test_df[<span class="st">"target"</span>]</span>
 <span id="cb2-3"><a></a>clf <span class="op">=</span> make_pipeline(CountVectorizer(max_features<span class="op">=</span><span class="dv">5000</span>), LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>))</span>
@@ -641,8 +575,8 @@ A field of study that gives computers the ability to learn without being explici
 <ul>
 <li>Now use the trained model to predict targets of unseen messages:</li>
 </ul>
-<div id="63bd9ad2" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div id="6808191b" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -689,49 +623,123 @@ A field of study that gives computers the ability to learn without being explici
 </div>
 </div>
 </section>
-<section id="predicting-on-unseen-data-using-the-trained-model" class="slide level2 smaller center">
-<h2>Predicting on unseen data using the trained model</h2>
+<section id="predicting-on-unseen-data" class="slide level2 smaller center">
+<h2>Predicting on unseen data</h2>
 <p><strong>The model is accurately predicting labels for the unseen text messages above!</strong></p>
-<div id="073bfb49" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="0eef2b4d" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <style type="text/css">
-#T_1dd9a_row0_col0, #T_1dd9a_row0_col1, #T_1dd9a_row1_col0, #T_1dd9a_row1_col1, #T_1dd9a_row2_col0, #T_1dd9a_row2_col1, #T_1dd9a_row3_col0, #T_1dd9a_row3_col1 {
+#T_7fc0e_row0_col0, #T_7fc0e_row0_col1, #T_7fc0e_row1_col0, #T_7fc0e_row1_col1, #T_7fc0e_row2_col0, #T_7fc0e_row2_col1, #T_7fc0e_row3_col0, #T_7fc0e_row3_col1 {
   text-align: left;
 }
 </style>
 
-<table id="T_1dd9a" class="caption-top" data-quarto-postprocess="true">
+<table id="T_7fc0e" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_1dd9a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">sms</th>
-<th id="T_1dd9a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">spam_predictions</th>
+<th id="T_7fc0e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">sms</th>
+<th id="T_7fc0e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">spam_predictions</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_1dd9a_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">3245</td>
-<td id="T_1dd9a_row0_col0" class="data row0 col0">Funny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens</td>
-<td id="T_1dd9a_row0_col1" class="data row0 col1">ham</td>
+<td id="T_7fc0e_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">3245</td>
+<td id="T_7fc0e_row0_col0" class="data row0 col0">Funny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens</td>
+<td id="T_7fc0e_row0_col1" class="data row0 col1">ham</td>
 </tr>
 <tr class="even">
-<td id="T_1dd9a_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">944</td>
-<td id="T_1dd9a_row1_col0" class="data row1 col0">I sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one me the less expensive ones</td>
-<td id="T_1dd9a_row1_col1" class="data row1 col1">ham</td>
+<td id="T_7fc0e_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">944</td>
+<td id="T_7fc0e_row1_col0" class="data row1 col0">I sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one me the less expensive ones</td>
+<td id="T_7fc0e_row1_col1" class="data row1 col1">ham</td>
 </tr>
 <tr class="odd">
-<td id="T_1dd9a_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">1044</td>
-<td id="T_1dd9a_row2_col0" class="data row2 col0">We know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p</td>
-<td id="T_1dd9a_row2_col1" class="data row2 col1">spam</td>
+<td id="T_7fc0e_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">1044</td>
+<td id="T_7fc0e_row2_col0" class="data row2 col0">We know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p</td>
+<td id="T_7fc0e_row2_col1" class="data row2 col1">spam</td>
 </tr>
 <tr class="even">
-<td id="T_1dd9a_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">2484</td>
-<td id="T_1dd9a_row3_col0" class="data row3 col0">Only if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.</td>
-<td id="T_1dd9a_row3_col1" class="data row3 col1">ham</td>
+<td id="T_7fc0e_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">2484</td>
+<td id="T_7fc0e_row3_col0" class="data row3 col0">Only if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.</td>
+<td id="T_7fc0e_row3_col1" class="data row3 col1">ham</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+</section>
+<section id="what-is-ml" class="slide level2 center">
+<h2>What is ML?</h2>
+<p>Machine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.</p>
+<blockquote>
+A field of study that gives computers the ability to learn without being explicitly programmed. <br> – Arthur Samuel (1959)
+</blockquote>
+<p>ML is a different way to think about problem solving.</p>
+</section>
+<section id="ml-vs.-traditional-programming" class="slide level2 center">
+<h2>ML vs.&nbsp;traditional programming</h2>
+<ul>
+<li>With machine learning, you’re likely to
+<ul>
+<li>Save time</li>
+<li>Customize and scale products</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../img/traditional-programming-vs-ML.png" class="quarto-figure quarto-figure-center" width="500"></p>
+</figure>
+</div>
+</section>
+<section id="prevalence-of-ml" class="slide level2 center">
+<h2>Prevalence of ML</h2>
+<p>Let’s look at some examples.</p>
+<!-- <img src="img/ml-examples.png" height="1000" width="1000">  -->
+
+<img data-src="../img/ml-examples.png" class="r-stretch"></section>
+<section id="activity-for-what-type-of-problems-ml-is-appropriate-5-mins" class="slide level2 center">
+<h2>Activity: For what type of problems ML is appropriate? (~5 mins)</h2>
+<p>Discuss with your neighbour for which of the following problems you would use machine learning</p>
+<ul>
+<li>Finding a list of prime numbers up to a limit</li>
+<li>Given an image, automatically identifying and labeling objects in the image</li>
+<li>Finding the distance between two nodes in a graph</li>
+</ul>
+</section>
+<section id="types-of-machine-learning" class="slide level2 center">
+<h2>Types of machine learning</h2>
+<p>Here are some typical learning problems.</p>
+<ul>
+<li><strong>Supervised learning</strong> (<a href="https://support.google.com/a/answer/2368132?hl=en">Gmail spam filtering</a>)
+<ul>
+<li>Training a model from input data and its corresponding targets to predict targets for new examples.<br>
+</li>
+</ul></li>
+<li>Unsupervised learning (<a href="https://news.google.com/">Google News</a>)
+<ul>
+<li>Training a model to find patterns in a dataset, typically an unlabeled dataset.</li>
+</ul></li>
+<li>Reinforcement learning (<a href="https://deepmind.com/research/case-studies/alphago-the-story-so-far">AlphaGo</a>)
+<ul>
+<li>A family of algorithms for finding suitable actions to take in a given situation in order to maximize a reward.</li>
+</ul></li>
+<li>Recommendation systems (<a href="https://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf">Amazon item recommendation system</a>)
+<ul>
+<li>Predict the “rating” or “preference” a user would give to an item.</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-supervised-learning" class="slide level2 center">
+<h2>What is supervised learning?</h2>
+<ul>
+<li>Training data comprises a set of observations (<span class="math inline">\(X\)</span>) and their corresponding targets (<span class="math inline">\(y\)</span>).</li>
+<li>We wish to find a model function <span class="math inline">\(f\)</span> that relates <span class="math inline">\(X\)</span> to <span class="math inline">\(y\)</span>.</li>
+<li>We use the model function to predict targets of new examples.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../img/sup-learning.png" class="quarto-figure quarto-figure-center" width="700"></p>
+</figure>
 </div>
 </section>
 <section id="evas-questions" class="slide level2 center">
@@ -758,7 +766,7 @@ A field of study that gives computers the ability to learn without being explici
 <li>We can also use machine learning to predict labels of given images using a technique called <strong>transfer learning</strong>.</li>
 </ul>
 <div class="scroll-container" style="overflow-y: scroll; height: 400px;">
-<div id="0e18453c" class="cell" data-execution_count="7">
+<div id="347ce7b8" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -825,8 +833,8 @@ Walker hound, Walker foxhound              0.582
 <section id="predicting-housing-prices" class="slide level2 center">
 <h2>Predicting housing prices</h2>
 <p>Suppose we want to predict housing prices given a number of attributes associated with houses. The target here is <strong>continuous</strong> and not <strong>discrete</strong>.</p>
-<div id="07226e21" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div id="ca638e4f" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
@@ -964,7 +972,7 @@ Walker hound, Walker foxhound              0.582
 </section>
 <section id="building-a-regression-model" class="slide level2 center">
 <h2>Building a regression model</h2>
-<div id="011167ed" class="cell" data-execution_count="9">
+<div id="de28efe9" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">from</span> lightgbm.sklearn <span class="im">import</span> LGBMRegressor</span>
 <span id="cb7-2"><a></a></span>
 <span id="cb7-3"><a></a>X_train, y_train <span class="op">=</span> train_df.drop(columns<span class="op">=</span> [<span class="st">"target"</span>]), train_df[<span class="st">"target"</span>]</span>
@@ -973,8 +981,9 @@ Walker hound, Walker foxhound              0.582
 <span id="cb7-6"><a></a>model <span class="op">=</span> LGBMRegressor()</span>
 <span id="cb7-7"><a></a>model.fit(X_train, y_train)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000736 seconds.
-You can set `force_col_wise=true` to remove the overhead.
+<pre><code>[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001001 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
 [LightGBM] [Info] Total Bins 2333
 [LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18
 [LightGBM] [Info] Start training from score 539762.702545</code></pre>
@@ -983,8 +992,8 @@ You can set `force_col_wise=true` to remove the overhead.
 </section>
 <section id="predicting-prices-of-unseen-houses" class="slide level2 center">
 <h2>Predicting prices of unseen houses</h2>
-<div id="6ba562a4" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div id="e56ebe33" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
@@ -1299,17 +1308,17 @@ You can set `force_col_wise=true` to remove the overhead.
 <li>When you open a Jupyter notebook in one of these apps, the document is “live”, meaning you can run the code.</li>
 </ul>
 <p>For example:</p>
-<div id="b75172e0" class="cell" data-execution_count="11">
+<div id="0b368873" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>2</code></pre>
 </div>
 </div>
-<div id="82075abe" class="cell" data-execution_count="12">
+<div id="f8c927b8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb11-2"><a></a>x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">9999</span></span>
 <span id="cb11-3"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>[9999, 2, 3]</code></pre>
 </div>
 </div>
@@ -1709,7 +1718,7 @@ You can set `force_col_wise=true` to remove the overhead.
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
+          var filterRegex = new RegExp("https:\/\/kvarada\.github\.io\/cpsc330-slides\/");
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

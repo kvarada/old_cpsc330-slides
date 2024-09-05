@@ -31,7 +31,7 @@
     "href": "slides-01-intro.html#meet-your-instructor",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Meet your instructor",
-    "text": "Meet your instructor\n\n\n\n\n\nVarada Kolhatkar [ʋəɾəda kɔːlɦəʈkər]\nYou can call me Varada, V, or Ada.\nI am an Assistant Professor of Teaching in Computer Science.\nI did my Ph.D. in Computational Linguistics at the University of Toronto.\nI primarily teach machine learning courses in the Master of Data Science (MDS) program.\nContact information\n\nEmail: kvarada@cs.ubc.ca\nOffice: ICCS 237",
+    "text": "Meet your instructor\n\n\n\n\n\nVarada Kolhatkar [ʋəɾəda kɔːlɦəʈkər]\nYou can call me Varada, V, or Ada.\nI am an Assistant Professor of Teaching in the Department of Computer Science.\nI did my Ph.D. in Computational Linguistics at the University of Toronto.\nI primarily teach machine learning courses in the Master of Data Science (MDS) program.\nContact information\n\nEmail: kvarada@cs.ubc.ca\nOffice: ICCS 237",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -77,11 +77,61 @@
     ]
   },
   {
-    "objectID": "slides-01-intro.html#what-is-machine-learning-ml",
-    "href": "slides-01-intro.html#what-is-machine-learning-ml",
+    "objectID": "slides-01-intro.html#spam-prediction",
+    "href": "slides-01-intro.html#spam-prediction",
     "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "What is Machine Learning (ML)?",
-    "text": "What is Machine Learning (ML)?\nMachine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.\n\nA field of study that gives computers the ability to learn without being explicitly programmed.  – Arthur Samuel (1959)\n\nML is a different way to think about problem solving.",
+    "section": "Spam prediction",
+    "text": "Spam prediction\n\nSuppose you are given some data with labeled spam and non-spam messages\n\n\nCodeOutput\n\n\n\nsms_df = pd.read_csv(DATA_DIR + \"spam.csv\", encoding=\"latin-1\")\nsms_df = sms_df.drop(columns = [\"Unnamed: 2\", \"Unnamed: 3\", \"Unnamed: 4\"])\nsms_df = sms_df.rename(columns={\"v1\": \"target\", \"v2\": \"sms\"})\ntrain_df, test_df = train_test_split(sms_df, test_size=0.10, random_state=42)\n\n\n\n\n\n\n\n\n\ntarget\nsms\n\n\n\n\nspam\nLookAtMe!: Thanks for your purchase of a video clip from LookAtMe!, you've been charged 35p. Think you can do better? Why not send a video in a MMSto 32323.\n\n\nham\nAight, I'll hit you up when I get some cash\n\n\nham\nDon no da:)whats you plan?\n\n\nham\nGoing to take your babe out ?\n\n\nham\nNo need lar. Jus testing e phone card. Dunno network not gd i thk. Me waiting 4 my sis 2 finish bathing so i can bathe. Dun disturb u liao u cleaning ur room.",
+    "crumbs": [
+      "Lecture 1: Introduction to CPSC 330"
+    ]
+  },
+  {
+    "objectID": "slides-01-intro.html#traditional-programming-vs.-ml",
+    "href": "slides-01-intro.html#traditional-programming-vs.-ml",
+    "title": "Lecture 1: Introduction to CPSC 330",
+    "section": "Traditional programming vs. ML",
+    "text": "Traditional programming vs. ML\n\nImagine writing a Python program for spam identification, i.e., whether an email is spam or non-spam.\nTraditional programming\n\nCome up with rules using human understanding of spam messages.\nTime consuming and hard to come up with robust set of rules.\n\nMachine learning\n\nCollect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.",
+    "crumbs": [
+      "Lecture 1: Introduction to CPSC 330"
+    ]
+  },
+  {
+    "objectID": "slides-01-intro.html#lets-train-a-model",
+    "href": "slides-01-intro.html#lets-train-a-model",
+    "title": "Lecture 1: Introduction to CPSC 330",
+    "section": "Let’s train a model",
+    "text": "Let’s train a model\n\nThere are several packages that help us perform machine learning.\n\n\nX_train, y_train = train_df[\"sms\"], train_df[\"target\"]\nX_test, y_test = test_df[\"sms\"], test_df[\"target\"]\nclf = make_pipeline(CountVectorizer(max_features=5000), LogisticRegression(max_iter=5000))\nclf.fit(X_train, y_train); # Training the model",
+    "crumbs": [
+      "Lecture 1: Introduction to CPSC 330"
+    ]
+  },
+  {
+    "objectID": "slides-01-intro.html#unseen-messages",
+    "href": "slides-01-intro.html#unseen-messages",
+    "title": "Lecture 1: Introduction to CPSC 330",
+    "section": "Unseen messages",
+    "text": "Unseen messages\n\nNow use the trained model to predict targets of unseen messages:\n\n\n\n\n\n\n\n\n\n\nsms\n\n\n\n\n3245\nFunny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens\n\n\n944\nI sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one m...\n\n\n1044\nWe know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p\n\n\n2484\nOnly if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.",
+    "crumbs": [
+      "Lecture 1: Introduction to CPSC 330"
+    ]
+  },
+  {
+    "objectID": "slides-01-intro.html#predicting-on-unseen-data",
+    "href": "slides-01-intro.html#predicting-on-unseen-data",
+    "title": "Lecture 1: Introduction to CPSC 330",
+    "section": "Predicting on unseen data",
+    "text": "Predicting on unseen data\nThe model is accurately predicting labels for the unseen text messages above!\n\n\n\n\n\n\n\n \nsms\nspam_predictions\n\n\n\n\n3245\nFunny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens\nham\n\n\n944\nI sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one me the less expensive ones\nham\n\n\n1044\nWe know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p\nspam\n\n\n2484\nOnly if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.\nham",
+    "crumbs": [
+      "Lecture 1: Introduction to CPSC 330"
+    ]
+  },
+  {
+    "objectID": "slides-01-intro.html#what-is-ml",
+    "href": "slides-01-intro.html#what-is-ml",
+    "title": "Lecture 1: Introduction to CPSC 330",
+    "section": "What is ML?",
+    "text": "What is ML?\nMachine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.\n\nA field of study that gives computers the ability to learn without being explicitly programmed.  – Arthur Samuel (1959)\n\nML is a different way to think about problem solving.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -91,7 +141,7 @@
     "href": "slides-01-intro.html#ml-vs.-traditional-programming",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "ML vs. traditional programming",
-    "text": "ML vs. traditional programming",
+    "text": "ML vs. traditional programming\n\nWith machine learning, you’re likely to\n\nSave time\nCustomize and scale products",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -102,16 +152,6 @@
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Prevalence of ML",
     "text": "Prevalence of ML\nLet’s look at some examples.",
-    "crumbs": [
-      "Lecture 1: Introduction to CPSC 330"
-    ]
-  },
-  {
-    "objectID": "slides-01-intro.html#saving-time-and-scaling-products",
-    "href": "slides-01-intro.html#saving-time-and-scaling-products",
-    "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Saving time and scaling products",
-    "text": "Saving time and scaling products\n\nImagine writing a program for spam identification, i.e., whether an email is spam or non-spam.\nTraditional programming\n\nCome up with rules using human understanding of spam messages.\nTime consuming and hard to come up with robust set of rules.\n\nMachine learning\n\nCollect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.\n\nWith machine learning, you’re likely to\n\nSave time\nCustomize and scale products",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -142,46 +182,6 @@
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "What is supervised learning?",
     "text": "What is supervised learning?\n\nTraining data comprises a set of observations (\\(X\\)) and their corresponding targets (\\(y\\)).\nWe wish to find a model function \\(f\\) that relates \\(X\\) to \\(y\\).\nWe use the model function to predict targets of new examples.",
-    "crumbs": [
-      "Lecture 1: Introduction to CPSC 330"
-    ]
-  },
-  {
-    "objectID": "slides-01-intro.html#example-predict-whether-a-message-is-spam-or-not",
-    "href": "slides-01-intro.html#example-predict-whether-a-message-is-spam-or-not",
-    "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Example: Predict whether a message is spam or not",
-    "text": "Example: Predict whether a message is spam or not\n\nSuppose you are given the input features \\(X\\) (sms) and target \\(y\\) (target) below.\n\n\nCodeOutput\n\n\n\nsms_df = pd.read_csv(DATA_DIR + \"spam.csv\", encoding=\"latin-1\")\nsms_df = sms_df.drop(columns = [\"Unnamed: 2\", \"Unnamed: 3\", \"Unnamed: 4\"])\nsms_df = sms_df.rename(columns={\"v1\": \"target\", \"v2\": \"sms\"})\ntrain_df, test_df = train_test_split(sms_df, test_size=0.10, random_state=42)\n\n\n\n\n\n\n\n\ntarget\nsms\n\n\n\n\nspam\nLookAtMe!: Thanks for your purchase of a video clip from LookAtMe!, you've been charged 35p. Think you can do better? Why not send a video in a MMSto 32323.\n\n\nham\nAight, I'll hit you up when I get some cash\n\n\nham\nDon no da:)whats you plan?\n\n\nham\nGoing to take your babe out ?\n\n\nham\nNo need lar. Jus testing e phone card. Dunno network not gd i thk. Me waiting 4 my sis 2 finish bathing so i can bathe. Dun disturb u liao u cleaning ur room.",
-    "crumbs": [
-      "Lecture 1: Introduction to CPSC 330"
-    ]
-  },
-  {
-    "objectID": "slides-01-intro.html#lets-train-a-model",
-    "href": "slides-01-intro.html#lets-train-a-model",
-    "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Let’s train a model",
-    "text": "Let’s train a model\n\nThere are several packages that help us perform machine learning.\nLet’s train a model to learn the mapping function between X and y using a package called sklearn.\n\n\nX_train, y_train = train_df[\"sms\"], train_df[\"target\"]\nX_test, y_test = test_df[\"sms\"], test_df[\"target\"]\nclf = make_pipeline(CountVectorizer(max_features=5000), LogisticRegression(max_iter=5000))\nclf.fit(X_train, y_train); # Training the model",
-    "crumbs": [
-      "Lecture 1: Introduction to CPSC 330"
-    ]
-  },
-  {
-    "objectID": "slides-01-intro.html#unseen-messages",
-    "href": "slides-01-intro.html#unseen-messages",
-    "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Unseen messages",
-    "text": "Unseen messages\n\nNow use the trained model to predict targets of unseen messages:\n\n\n\n\n\n\n\n\n\n\nsms\n\n\n\n\n3245\nFunny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens\n\n\n944\nI sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one m...\n\n\n1044\nWe know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p\n\n\n2484\nOnly if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.",
-    "crumbs": [
-      "Lecture 1: Introduction to CPSC 330"
-    ]
-  },
-  {
-    "objectID": "slides-01-intro.html#predicting-on-unseen-data-using-the-trained-model",
-    "href": "slides-01-intro.html#predicting-on-unseen-data-using-the-trained-model",
-    "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Predicting on unseen data using the trained model",
-    "text": "Predicting on unseen data using the trained model\nThe model is accurately predicting labels for the unseen text messages above!\n\n\n\n\n\n\n\n \nsms\nspam_predictions\n\n\n\n\n3245\nFunny fact Nobody teaches volcanoes 2 erupt, tsunamis 2 arise, hurricanes 2 sway aroundn no 1 teaches hw 2 choose a wife Natural disasters just happens\nham\n\n\n944\nI sent my scores to sophas and i had to do secondary application for a few schools. I think if you are thinking of applying, do a research on cost also. Contact joke ogunrinde, her school is one me the less expensive ones\nham\n\n\n1044\nWe know someone who you know that fancies you. Call 09058097218 to find out who. POBox 6, LS15HB 150p\nspam\n\n\n2484\nOnly if you promise your getting out as SOON as you can. And you'll text me in the morning to let me know you made it in ok.\nham",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -221,7 +221,7 @@
     "href": "slides-01-intro.html#building-a-regression-model",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Building a regression model",
-    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000736 seconds.\nYou can set `force_col_wise=true` to remove the overhead.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
+    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001001 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
