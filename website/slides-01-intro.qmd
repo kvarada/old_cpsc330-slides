@@ -11,17 +11,6 @@ format:
     resources:
       - ../data/
       - img/
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .qmd
-      format_name: quarto
-      format_version: '1.0'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: 'Python [conda env:cpsc330]'
-    language: python
-    name: conda-env-cpsc330-py
 ---
 
 ```{python}
@@ -30,7 +19,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import sys
-sys.path.append(os.path.join(os.path.abspath(".."), "code"))
+sys.path.append(os.path.join(os.path.abspath("."), "code"))
 from IPython.display import HTML, display
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -40,7 +29,7 @@ from sklearn.pipeline import make_pipeline
 plt.rcParams["font.size"] = 16
 pd.set_option("display.max_colwidth", 200)
 
-DATA_DIR = '../data/' 
+DATA_DIR = 'data/' 
 ```
 
 ## Learning outcomes 
