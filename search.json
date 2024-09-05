@@ -221,7 +221,7 @@
     "href": "slides-01-intro.html#building-a-regression-model",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Building a regression model",
-    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001092 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
+    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001196 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -251,7 +251,7 @@
     "href": "slides-01-intro.html#questions-for-you",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "❓❓ Questions for you",
-    "text": "❓❓ Questions for you\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are True (iClicker)\n\n\nPredicting spam is an example of machine learning.\n\n\nPredicting housing prices is not an example of machine learning.\n\n\nFor problems such as spelling correction, translation, face recognition, spam identification, if you are a domain expert, it’s usually faster and scalable to come up with a robust set of rules manually rather than building a machine learning model.\n\n\nIf you are asked to write a program to find all prime numbers up to a limit, it is better to implement one of the algorithms for doing so rather than using machine learning.\n\n\nGoogle News is likely be using machine learning to organize news.",
+    "text": "❓❓ Questions for you\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are True** (iClicker)**\n\n\nPredicting spam is an example of machine learning.\n\n\nPredicting housing prices is not an example of machine learning.\n\n\nFor problems such as spelling correction, translation, face recognition, spam identification, if you are a domain expert, it’s usually faster and scalable to come up with a robust set of rules manually rather than building a machine learning model.\n\n\nIf you are asked to write a program to find all prime numbers up to a limit, it is better to implement one of the algorithms for doing so rather than using machine learning.\n\n\nGoogle News is likely be using machine learning to organize news.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
