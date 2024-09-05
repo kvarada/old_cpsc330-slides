@@ -67,11 +67,11 @@
     ]
   },
   {
-    "objectID": "slides-01-intro.html#activity-1",
-    "href": "slides-01-intro.html#activity-1",
+    "objectID": "slides-01-intro.html#activity-1-httpsshorturl.atcteou",
+    "href": "slides-01-intro.html#activity-1-httpsshorturl.atcteou",
     "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Activity 1",
-    "text": "Activity 1\n\n\n\nWhat do you know about machine learning?\nWhat would you like to get out this course?\nAre there any particular topics or aspects of this course that you are especially excited or anxious about? Why?",
+    "section": "Activity 1: https://shorturl.at/CteOU",
+    "text": "Activity 1: https://shorturl.at/CteOU\n\n\n\nWrite your answers to the questions below in this Google doc: https://shorturl.at/CteOU\nWhat do you know about machine learning?\nWhat would you like to get out this course?\nAre there any particular topics or aspects of this course that you are especially excited or anxious about? Why?",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -91,7 +91,7 @@
     "href": "slides-01-intro.html#traditional-programming-vs.-ml",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Traditional programming vs. ML",
-    "text": "Traditional programming vs. ML\n\nImagine writing a Python program for spam identification, i.e., whether an email is spam or non-spam.\nTraditional programming\n\nCome up with rules using human understanding of spam messages.\nTime consuming and hard to come up with robust set of rules.\n\nMachine learning\n\nCollect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.",
+    "text": "Traditional programming vs. ML\n\nImagine writing a Python program for spam identification, i.e., whether a text message or an email is spam or non-spam.\nTraditional programming\n\nCome up with rules using human understanding of spam messages.\nTime consuming and hard to come up with robust set of rules.\n\nMachine learning\n\nCollect large amount of data of spam and non-spam emails and let the machine learning algorithm figure out rules.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -127,11 +127,11 @@
     ]
   },
   {
-    "objectID": "slides-01-intro.html#what-is-ml",
-    "href": "slides-01-intro.html#what-is-ml",
+    "objectID": "slides-01-intro.html#a-different-way-to-solve-problems",
+    "href": "slides-01-intro.html#a-different-way-to-solve-problems",
     "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "What is ML?",
-    "text": "What is ML?\nMachine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.\n\nA field of study that gives computers the ability to learn without being explicitly programmed.  – Arthur Samuel (1959)\n\nML is a different way to think about problem solving.",
+    "section": "A different way to solve problems",
+    "text": "A different way to solve problems\nMachine learning uses computer programs to model data. It can be used to extract hidden patterns, make predictions in new situation, or generate novel content.\n\nA field of study that gives computers the ability to learn without being explicitly programmed.  – Arthur Samuel (1959)",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -191,7 +191,7 @@
     "href": "slides-01-intro.html#evas-questions",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "🤔 Eva’s questions",
-    "text": "🤔 Eva’s questions\n\n\nAt this point, Eva is wondering about many questions.\n\nHow are we exactly “learning” whether a message is spam and ham?\nWhat do you mean by “learn without being explicitly programmed”? The code has to be somewhere …\nAre we expected to get correct predictions for all possible messages? How does it predict the label for a message it has not seen before?\n\nWhat if the model mis-labels an unseen example? For instance, what if the model incorrectly predicts a non-spam as a spam? What would be the consequences?\nHow do we measure the success or failure of spam identification?\nIf you want to use this model in the wild, how do you know how reliable it is?\n\nWould it be useful to know how confident the model is about the predictions rather than just a yes or a no?\n\nIt’s great to think about these questions right now. But Eva has to be patient. By the end of this course you’ll know answers to many of these questions!",
+    "text": "🤔 Eva’s questions\n\n\nAt this point, Eva is wondering about many questions.\n\nHow are we exactly “learning” whether a message is spam and ham?\nAre we expected to get correct predictions for all possible messages? How does it predict the label for a message it has not seen before?\n\nWhat if the model mis-labels an unseen example? For instance, what if the model incorrectly predicts a non-spam as a spam? What would be the consequences?\nHow do we measure the success or failure of spam identification?\nIf you want to use this model in the wild, how do you know how reliable it is?\n\nWould it be useful to know how confident the model is about the predictions rather than just a yes or a no?\n\nIt’s great to think about these questions right now. But Eva has to be patient. By the end of this course you’ll know answers to many of these questions!",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -221,7 +221,7 @@
     "href": "slides-01-intro.html#building-a-regression-model",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Building a regression model",
-    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000769 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
+    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001092 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -251,17 +251,17 @@
     "href": "slides-01-intro.html#questions-for-you",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "❓❓ Questions for you",
-    "text": "❓❓ Questions for you\niClicker cloud join link:\nSelect all of the following statements which are True (iClicker)\n\n\nPredicting spam is an example of machine learning.\n\n\nPredicting housing prices is not an example of machine learning.\n\n\nFor problems such as spelling correction, translation, face recognition, spam identification, if you are a domain expert, it’s usually faster and scalable to come up with a robust set of rules manually rather than building a machine learning model.\n\n\nIf you are asked to write a program to find all prime numbers up to a limit, it is better to implement one of the algorithms for doing so rather than using machine learning.\n\n\nGoogle News is likely be using machine learning to organize news.",
+    "text": "❓❓ Questions for you\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are True (iClicker)\n\n\nPredicting spam is an example of machine learning.\n\n\nPredicting housing prices is not an example of machine learning.\n\n\nFor problems such as spelling correction, translation, face recognition, spam identification, if you are a domain expert, it’s usually faster and scalable to come up with a robust set of rules manually rather than building a machine learning model.\n\n\nIf you are asked to write a program to find all prime numbers up to a limit, it is better to implement one of the algorithms for doing so rather than using machine learning.\n\n\nGoogle News is likely be using machine learning to organize news.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
   },
   {
-    "objectID": "slides-01-intro.html#surveys-8-min",
-    "href": "slides-01-intro.html#surveys-8-min",
+    "objectID": "slides-01-intro.html#surveys",
+    "href": "slides-01-intro.html#surveys",
     "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Surveys (~8 min)",
-    "text": "Surveys (~8 min)\n\nPlease complete the “Getting to know you” survey on Canvas.\nAlso, please complete the anonymous restaurant survey on Qualtrics here.\n\nWe will try to analyze this data set in the coming weeks.",
+    "section": "Surveys",
+    "text": "Surveys\n\nPlease complete the “Getting to know you” survey on Canvas.\nAlso, please complete the anonymous restaurant survey on Qualtrics here.\n\nWe will try to analyze this data set in the coming weeks.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -271,7 +271,7 @@
     "href": "slides-01-intro.html#about-this-course",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "About this course",
-    "text": "About this course\n\n\n\n\n\n\nImportant\n\n\nCourse website: https://github.com/UBC-CS/cpsc330-2024W1 is the most important link. Please read everything on this GitHub page!\n\n\n\n\n\n\n\n\n\nImportant\n\n\nThe Syllabus quiz available on Canvas, Due: Monday, Sept 19th at 11:59pm.",
+    "text": "About this course\n\n\n\n\n\n\nImportant\n\n\nCourse website: https://github.com/UBC-CS/cpsc330-2024W1 is the most important link. Please read everything on this GitHub page!\n\n\n\n\n\n\n\n\n\nImportant\n\n\nMake sure you go through the syllabus thoroughly and complete the syllabus quiz before Monday, Sept 19th at 11:59pm.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -291,7 +291,7 @@
     "href": "slides-01-intro.html#registration-waitlist-and-prerequisites",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Registration, waitlist and prerequisites",
-    "text": "Registration, waitlist and prerequisites\n\n\n\n\n\n\nImportant\n\n\nPlease go through this document carefully before contacting your instructors about these issues. Even then, we are very unlikely to be able to help with registration, waitlist or prerequisite issues.\n\n\n\n\nIf you are on waitlist and if you’d like to try your chances, you should be able to access Canvas to do the syllabus quiz and homework assignments.\nIf you’re unable to make it this time, there will be two sections of this course offered next semester and then again in the summer",
+    "text": "Registration, waitlist and prerequisites\n\n\n\n\n\n\nImportant\n\n\nPlease go through this document carefully before contacting your instructors about these issues. Even then, we are very unlikely to be able to help with registration, waitlist or prerequisite issues.\n\n\n\n\nIf you are on waitlist and if you’d like to try your chances, you should be able to access Canvas and Piazza.\n\nIf you’re unable to make it this time, there will be two sections of this course offered next semester and then again in the summer.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -301,7 +301,7 @@
     "href": "slides-01-intro.html#lecture-format",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Lecture format",
-    "text": "Lecture format\n\nIn person lectures T/Th.\nSometimes there will be videos to watch before or during the lecture time. You will find the list of pre-watch videos in the schedule on the course webpage.\nWe will also try to work on some questions and exercises together during the class.\nAll materials will be posted in this GitHub repository.\nWeekly tutorials will be office hour format run by the TAs and are completely optional.\n\nYou do not need to be registered in a tutorial.\nYou can attend whatever tutorials or office hours your want, regardless of in which/whether you’re registered.",
+    "text": "Lecture format\n\nIn person lectures T/Th.\nSometimes there will be videos to watch before lecture. You will find the list of pre-watch videos in the schedule on the course webpage.\nWe will also try to work on some questions and exercises together during the class.\nAll materials will be posted in this GitHub repository.\nWeekly tutorials will be office hour format run by the TAs and are completely optional.\n\nYou do not need to be registered in a tutorial.\nYou can attend whatever tutorials or office hours your want, regardless of in which/whether you’re registered.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -311,7 +311,7 @@
     "href": "slides-01-intro.html#home-work-assignments",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Home work assignments",
-    "text": "Home work assignments\n\nFirst homework assignment is due this coming Monday, September 09, midnight. This is a relatively straightforward assignment on Python. If you struggle with this assignment then that could be a sign that you will struggle later on in the course.\n\nYou must do the first two homework assignments on your own.\nI’m hoping you’ll be able to work with partners on subsequent assignments.",
+    "text": "Home work assignments\n\nFirst homework assignment is due this coming Tuesday, September 10, midnight. This is a relatively straightforward assignment on Python. If you struggle with this assignment then that could be a sign that you will struggle later on in the course.\n\nYou must do the first two homework assignments on your own.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -391,7 +391,7 @@
     "href": "slides-01-intro.html#lecture-notes",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Lecture notes",
-    "text": "Lecture notes\n\nAll the lectures from last year are available here.\nWe cannot promise anything will stay the same from last year to this year, so read them in advance at your own risk.\nA “finalized” version will be pushed to GitHub and the Jupyter book right before each class.\nEach instructor will have slightly adapted versions of notes to present slides during lectures.",
+    "text": "Lecture notes\n\nAll the lectures from last year are available here.\nWe cannot promise anything will stay the same from last year to this year, so read them in advance at your own risk.\nA “finalized” version will be pushed to GitHub and the Jupyter book right before each class.\nEach instructor will have slightly adapted versions of notes to present slides during lectures.\n\nYou will find the link to these slides in our repository: https://github.com/UBC-CS/cpsc330-2024W1/tree/main/lectures/102-Varada-lectures",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -407,11 +407,11 @@
     ]
   },
   {
-    "objectID": "slides-01-intro.html#recommended-browser",
-    "href": "slides-01-intro.html#recommended-browser",
+    "objectID": "slides-01-intro.html#recommended-browser-and-tools",
+    "href": "slides-01-intro.html#recommended-browser-and-tools",
     "title": "Lecture 1: Introduction to CPSC 330",
-    "section": "Recommended browser",
-    "text": "Recommended browser\n\nI’ll test the course notebooks and exams, which we’ll be doing via Canvas, on the following two browsers: Chrome and Firefox. So I recommend that you use one of these browsers for the course.\nYou can install Chrome here.\nYou can install Firefox here.\n\nIn this course, we will primarily be using Python , git, GitHub, Canvas, Gradescope, Piazza, and PrairieLearn.",
+    "section": "Recommended browser and tools",
+    "text": "Recommended browser and tools\n\nYou can install Chrome here.\nYou can install Firefox here.\n\nIn this course, we will primarily be using Python , git, GitHub, Canvas, Gradescope, Piazza, and PrairieLearn.",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -441,7 +441,7 @@
     "href": "slides-01-intro.html#checklist-for-you-before-the-next-class",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Checklist for you before the next class",
-    "text": "Checklist for you before the next class\n\nAre you able to access course Canvas shell?\nAre you able to access course Piazza?\nAre you able to access Gradescope? (If not, refer to the Gradescope Student Guide.)\nAre you able to access iClicker Cloud for this course?\nDid you follow the setup instructions here to create a course conda environment on your computer?\nDid you complete the “Getting to know you” survey on Canvas?\nDid you complete the anonymous restaurant survey on Qualtrics?\nDid you complete the syllabus quiz on Canvas?\nAre you almost finished or at least started with homework 1?",
+    "text": "Checklist for you before the next class\n\nAre you able to access course Canvas shell?\nAre you able to access course Piazza?\nAre you able to access Gradescope? (If not, refer to the Gradescope Student Guide.)\nAre you able to access iClicker Cloud for this course?\nDid you follow the setup instructions here to create a course conda environment on your computer?\nDid you complete the “Getting to know you” survey on Canvas?\nDid you complete the anonymous restaurant survey on Qualtrics?\nAre you almost finished or at least started with homework 1?",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
