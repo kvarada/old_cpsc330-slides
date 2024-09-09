@@ -451,7 +451,7 @@
     "href": "slides-02-terminology-decision-trees.html#announcements",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Announcements",
-    "text": "Announcements\n\nThings due this week\n\nHomework 1 (hw1): Due Sept 10 11:59pm\n\nHomework 2 (hw2) has been released (Due: Sept 18, 11:59pm)\n\nThere is some autograding in this homework.\n\nYou can find the tentative due dates for all deliverables here.\nPlease monitor Piazza (especially pinned posts and instructor posts) for announcements.\nI’ll assume that you’ve watched the pre-lecture videos.",
+    "text": "Announcements\n\nThings due this week\n\nHomework 1 (hw1): Due Sept 10 11:59pm\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nThere is some autograding in this homework.\n\nYou can find the tentative due dates for all deliverables here.\nPlease monitor Piazza (especially pinned posts and instructor posts) for announcements.\nI’ll assume that you’ve watched the pre-lecture videos.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -511,7 +511,7 @@
     "href": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Classification vs. Regression",
-    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nhours_flexibility\nstart_up\ncoffee_machine\nboss_vegan\nhappy?\n\n\n\n\n0\n1\n1\n1\n0\n0\nhappy\n\n\n1\n1\n1\n0\n0\n1\nhappy\n\n\n2\n1\n0\n1\n1\n0\nhappy\n\n\n3\n0\n1\n0\n0\n0\nunhappy\n\n\n4\n0\n1\n1\n1\n0\nunhappy\n\n\n5\n1\n0\n0\n1\n0\nhappy\n\n\n6\n1\n1\n0\n1\n0\nhappy\n\n\n7\n0\n0\n1\n0\n1\nunhappy\n\n\n8\n1\n0\n1\n0\n0\nunhappy\n\n\n9\n0\n0\n0\n1\n0\nunhappy\n\n\n10\n1\n0\n0\n1\n1\nhappy",
+    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nhours_flexibility\nstart_up\ncoffee_machine\nboss_vegan\nhappy?\n\n\n\n\n0\n1\n1\n1\n0\n0\nhappy\n\n\n1\n1\n1\n0\n0\n1\nhappy\n\n\n2\n1\n0\n1\n1\n0\nhappy\n\n\n3\n0\n1\n0\n0\n0\nunhappy\n\n\n4\n0\n1\n1\n1\n0\nunhappy",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -541,7 +541,17 @@
     "href": "slides-02-terminology-decision-trees.html#baseline",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Baseline",
-    "text": "Baseline\n\nWhat’s the simplest possible algorithm?\n\nPredict the most popular target.\n\n\n\nfrom sklearn.dummy import DummyClassifier\n\nX = toy_happiness_df.drop(columns=[\"happy?\"])\ny = toy_happiness_df[\"happy?\"]\n\nmodel = DummyClassifier() # Define a class object of the model \nmodel.fit(X, y)\ntoy_happiness_df['dummy_predictions'] = model.predict(X) \ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nhours_flexibility\nstart_up\ncoffee_machine\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n1\n1\n1\n0\n0\nhappy\nhappy\n\n\n1\n1\n1\n0\n0\n1\nhappy\nhappy\n\n\n2\n1\n0\n1\n1\n0\nhappy\nhappy\n\n\n3\n0\n1\n0\n0\n0\nunhappy\nhappy\n\n\n4\n0\n1\n1\n1\n0\nunhappy\nhappy\n\n\n5\n1\n0\n0\n1\n0\nhappy\nhappy\n\n\n6\n1\n1\n0\n1\n0\nhappy\nhappy\n\n\n7\n0\n0\n1\n0\n1\nunhappy\nhappy\n\n\n8\n1\n0\n1\n0\n0\nunhappy\nhappy\n\n\n9\n0\n0\n0\n1\n0\nunhappy\nhappy\n\n\n10\n1\n0\n0\n1\n1\nhappy\nhappy",
+    "text": "Baseline\n\nWhat’s the simplest possible algorithm?\n\nPredict the most popular target.\n\n\n\nfrom sklearn.dummy import DummyClassifier\n\nX = toy_happiness_df.drop(columns=[\"happy?\"])\ny = toy_happiness_df[\"happy?\"]\n\nmodel = DummyClassifier(strategy=\"most_frequent\") # Define a class object of the model \nmodel.fit(X, y)\ntoy_happiness_df['dummy_predictions'] = model.predict(X)\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nhours_flexibility\nstart_up\ncoffee_machine\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n1\n1\n1\n0\n0\nhappy\nhappy\n\n\n1\n1\n1\n0\n0\n1\nhappy\nhappy\n\n\n2\n1\n0\n1\n1\n0\nhappy\nhappy\n\n\n3\n0\n1\n0\n0\n0\nunhappy\nhappy\n\n\n4\n0\n1\n1\n1\n0\nunhappy\nhappy\n\n\n5\n1\n0\n0\n1\n0\nhappy\nhappy\n\n\n6\n1\n1\n0\n1\n0\nhappy\nhappy\n\n\n7\n0\n0\n1\n0\n1\nunhappy\nhappy\n\n\n8\n1\n0\n1\n0\n0\nunhappy\nhappy\n\n\n9\n0\n0\n0\n1\n0\nunhappy\nhappy\n\n\n10\n1\n0\n0\n1\n1\nhappy\nhappy",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#intuition",
+    "href": "slides-02-terminology-decision-trees.html#intuition",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Intuition",
+    "text": "Intuition\n\nDecision trees find the “best” way to split data to make predictions.\nEach split is based on a question, like ‘Are the colleagues supportive?’\nThe goal is to group data by similar outcomes at each step.\nNow, let’s see a decision tree using sklearn.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -557,21 +567,11 @@
     ]
   },
   {
-    "objectID": "slides-02-terminology-decision-trees.html#intuition",
-    "href": "slides-02-terminology-decision-trees.html#intuition",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Intuition",
-    "text": "Intuition",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
     "objectID": "slides-02-terminology-decision-trees.html#prediction",
     "href": "slides-02-terminology-decision-trees.html#prediction",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Prediction",
-    "text": "Prediction",
+    "text": "Prediction\n\nGiven a new example, how does a decision tree predict the class of this example?\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 0, hours_flexibility = 0, start_up =1, coffee_machine = 1, vegan_boss = 1,",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -581,7 +581,17 @@
     "href": "slides-02-terminology-decision-trees.html#training-high-level",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Training (high level)",
-    "text": "Training (high level)",
+    "text": "Training (high level)\n\nHow many possible questions could we ask in this context?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nhours_flexibility\nstart_up\ncoffee_machine\nboss_vegan\n\n\n\n\n0\n1\n1\n1\n0\n0\n\n\n1\n1\n1\n0\n0\n1\n\n\n2\n1\n0\n1\n1\n0\n\n\n3\n0\n1\n0\n0\n0\n\n\n4\n0\n1\n1\n1\n0\n\n\n5\n1\n0\n0\n1\n0\n\n\n6\n1\n1\n0\n1\n0\n\n\n7\n0\n0\n1\n0\n1\n\n\n8\n1\n0\n1\n0\n0\n\n\n9\n0\n0\n0\n1\n0\n\n\n10\n1\n0\n0\n1\n1",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#training-high-level-1",
+    "href": "slides-02-terminology-decision-trees.html#training-high-level-1",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Training (high level)",
+    "text": "Training (high level)\n\nDecision tree learning is a search process to find the “best” tree among many possible ones.\nWe evaluate questions using measures like information gain or the Gini index to find the most effective split.\nAt each step, we aim to split the data into groups with more certainty in their outcomes.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -591,27 +601,57 @@
     "href": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Parameters vs. Hyperparameters",
-    "text": "Parameters vs. Hyperparameters",
+    "text": "Parameters vs. Hyperparameters\n\nParameters\n\nThe questions (features and thresholds) used to split the data at each node.\nExample: supportive_colleagues &lt;= 0.5 at the root node\n\n\nHyperparameters\n\nSettings that control tree growth, like max_depth, which limits how deep the tree can go.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
   },
   {
-    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary",
-    "href": "slides-02-terminology-decision-trees.html#decision-boundary",
+    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
+    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Decision boundary",
-    "text": "Decision boundary",
+    "section": "Decision boundary with max_depth=1",
+    "text": "Decision boundary with max_depth=1",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
   },
   {
-    "objectID": "slides-02-terminology-decision-trees.html#iclicker",
-    "href": "slides-02-terminology-decision-trees.html#iclicker",
+    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
+    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "iClicker",
-    "text": "iClicker",
+    "section": "Decision boundary with max_depth=2",
+    "text": "Decision boundary with max_depth=2",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.2: Supervised vs unsupervised",
+    "text": "iClicker 2.2: Supervised vs unsupervised\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of supervised machine learning\n\n\nFinding groups of similar properties in a real estate data set.\n\n\nPredicting whether someone will have a heart attack or not on the basis of demographic, diet, and clinical measurement.\n\n\nGrouping articles on different topics from different news sources (something like the Google News app).\n\n\nDetecting credit card fraud based on examples of fraudulent and non-fraudulent transactions.\n\n\nGiven some measure of employee performance, identify the key factors which are likely to influence their performance.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.3: Classification vs. Regression",
+    "text": "iClicker 2.3: Classification vs. Regression\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of regression problems\n\n\nPredicting the price of a house based on features such as number of bedrooms and the year built.\n\n\nPredicting if a house will sell or not based on features like the price of the house, number of rooms, etc.\n\n\nPredicting percentage grade in CPSC 330 based on past grades.\n\n\nPredicting whether you should bicycle tomorrow or not based on the weather forecast.\n\n\nPredicting appropriate thermostat temperature based on the wind speed and the number of people in a room.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.5: Baselines and Decision trees",
+    "text": "iClicker 2.5: Baselines and Decision trees\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nChange in features (i.e., binarizing features above) would change DummyClassifier predictions.\n\n\npredict takes only X as argument whereas fit and score take both X and y as arguments.\n\n\nFor the decision tree algorithm to work, the feature values must be binary.\n\n\nThe prediction in a decision tree works by routing the example from the root to the leaf.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]

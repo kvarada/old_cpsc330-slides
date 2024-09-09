@@ -406,7 +406,7 @@
 <ul>
 <li>Homework 1 (hw1): Due Sept 10 11:59pm</li>
 </ul></li>
-<li>Homework 2 (hw2) has been released (Due: Sept 18, 11:59pm)
+<li>Homework 2 (hw2) has been released (Due: Sept 16, 11:59pm)
 <ul>
 <li>There is some autograding in this homework.</li>
 </ul></li>
@@ -442,7 +442,7 @@
 <li>There are many frameworks to do do machine learning.</li>
 <li>We’ll mainly be using <a href="https://scikit-learn.org/stable/"><code>scikit-learn</code> framework</a>.</li>
 </ul>
-<div id="30fb3f60" class="cell" data-execution_count="2">
+<div id="33b2558e" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 
         <iframe width="1000" height="650" src="https://scikit-learn.org" frameborder="0" allowfullscreen=""></iframe>
@@ -453,7 +453,7 @@
 <section id="running-example" class="slide level2 scroll-container center" style="overflow-y: scroll; height: 400px;">
 <h2>Running example</h2>
 <p>Imagine that you’re in this lucky situation where after graduating, you’ve a number of a few job offers and you want to make a decision on which one to pick.</p>
-<div id="1fd8f817" class="cell" data-execution_count="3">
+<div id="2ccff346" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>toy_happiness_df <span class="op">=</span> pd.read_csv(DATA_DIR <span class="op">+</span> <span class="st">'toy_job_happiness.csv'</span>)</span>
 <span id="cb1-2"><a></a>toy_happiness_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -616,7 +616,7 @@
 <ul>
 <li>Is this a <strong>classification</strong> problem or a <strong>regression</strong> problem?</li>
 </ul>
-<div id="a84d6f6d" class="cell" data-execution_count="4">
+<div id="285b0d4b" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <style scoped="">
@@ -691,60 +691,6 @@
 <td>0</td>
 <td>unhappy</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>happy</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>happy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>unhappy</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>unhappy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>unhappy</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>happy</td>
-</tr>
 </tbody>
 </table>
 
@@ -781,15 +727,15 @@
 <li>Predict the most popular target.</li>
 </ul></li>
 </ul>
-<div id="991f898d" class="cell" data-execution_count="5">
+<div id="ab40af3d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>X <span class="op">=</span> toy_happiness_df.drop(columns<span class="op">=</span>[<span class="st">"happy?"</span>])</span>
 <span id="cb2-4"><a></a>y <span class="op">=</span> toy_happiness_df[<span class="st">"happy?"</span>]</span>
 <span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a>model <span class="op">=</span> DummyClassifier() <span class="co"># Define a class object of the model </span></span>
+<span id="cb2-6"><a></a>model <span class="op">=</span> DummyClassifier(strategy<span class="op">=</span><span class="st">"most_frequent"</span>) <span class="co"># Define a class object of the model </span></span>
 <span id="cb2-7"><a></a>model.fit(X, y)</span>
-<span id="cb2-8"><a></a>toy_happiness_df[<span class="st">'dummy_predictions'</span>] <span class="op">=</span> model.predict(X) </span>
+<span id="cb2-8"><a></a>toy_happiness_df[<span class="st">'dummy_predictions'</span>] <span class="op">=</span> model.predict(X)</span>
 <span id="cb2-9"><a></a>toy_happiness_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -943,10 +889,19 @@
 <h1>Decision trees</h1>
 
 </section>
+<section id="intuition" class="slide level2 center">
+<h2>Intuition</h2>
+<ul>
+<li>Decision trees find the “best” way to split data to make predictions.</li>
+<li>Each split is based on a question, like ‘Are the colleagues supportive?’</li>
+<li>The goal is to group data by similar outcomes at each step.</li>
+<li>Now, let’s see a decision tree using sklearn.</li>
+</ul>
+</section>
 <section id="decision-tree-with-sklearn" class="slide level2 center">
 <h2>Decision tree with <code>sklearn</code></h2>
 <p>Let’s train a simple decision tree on our toy dataset.</p>
-<div id="3c65a89b" class="cell" data-execution_count="6">
+<div id="1e0e508f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier <span class="co"># import the classifier</span></span>
 <span id="cb3-2"><a></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree</span>
 <span id="cb3-3"><a></a></span>
@@ -962,23 +917,264 @@
 </div>
 </div>
 </section>
-<section id="intuition" class="slide level2 center">
-<h2>Intuition</h2>
-</section>
 <section id="prediction" class="slide level2 center">
 <h2>Prediction</h2>
+<ul>
+<li>Given a new example, how does a decision tree predict the class of this example?<br>
+</li>
+<li>What would be the prediction for the example below using the tree above?
+<ul>
+<li>supportive_colleagues = 0, hours_flexibility = 0, start_up =1, coffee_machine = 1, vegan_boss = 1,</li>
+</ul></li>
+</ul>
+<div id="6521998a" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides-02-terminology-decision-trees_files/figure-revealjs/cell-8-output-1.png" width="763" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="training-high-level" class="slide level2 center">
+<section id="training-high-level" class="slide level2 scroll-container center" style="overflow-y: scroll; height: 400px;">
 <h2>Training (high level)</h2>
+<ul>
+<li>How many possible questions could we ask in this context?</li>
+</ul>
+<div id="e35b951b" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">supportive_colleagues</th>
+<th data-quarto-table-cell-role="th">hours_flexibility</th>
+<th data-quarto-table-cell-role="th">start_up</th>
+<th data-quarto-table-cell-role="th">coffee_machine</th>
+<th data-quarto-table-cell-role="th">boss_vegan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="training-high-level-1" class="slide level2 center">
+<h2>Training (high level)</h2>
+<ul>
+<li>Decision tree learning is a search process to find the “best” tree among many possible ones.</li>
+<li>We evaluate questions using measures like <strong>information gain</strong> or the <strong>Gini index</strong> to find the most effective split.</li>
+<li>At each step, we aim to split the data into groups with more certainty in their outcomes.</li>
+</ul>
 </section>
 <section id="parameters-vs.-hyperparameters" class="slide level2 center">
 <h2>Parameters vs.&nbsp;Hyperparameters</h2>
+<ul>
+<li>Parameters
+<ul>
+<li>The questions (features and thresholds) used to split the data at each node.</li>
+<li>Example: supportive_colleagues &lt;= 0.5 at the root node<br>
+</li>
+</ul></li>
+<li>Hyperparameters
+<ul>
+<li>Settings that control tree growth, like <code>max_depth</code>, which limits how deep the tree can go.</li>
+</ul></li>
+</ul>
 </section>
-<section id="decision-boundary" class="slide level2 center">
-<h2>Decision boundary</h2>
+<section id="decision-boundary-with-max_depth1" class="slide level2 center">
+<h2>Decision boundary with <code>max_depth=1</code></h2>
+<div id="1307757e" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides-02-terminology-decision-trees_files/figure-revealjs/cell-10-output-1.png" width="1236" height="517"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="iclicker" class="slide level2 center">
-<h2>iClicker</h2>
+<section id="decision-boundary-with-max_depth2" class="slide level2 center">
+<h2>Decision boundary with <code>max_depth=2</code></h2>
+<div id="55ef8f74" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides-02-terminology-decision-trees_files/figure-revealjs/cell-11-output-1.png" width="1236" height="517"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="iclicker-2.2-supervised-vs-unsupervised" class="slide level2 center">
+<h2>iClicker 2.2: Supervised vs unsupervised</h2>
+<p>Clicker cloud join link: https://join.iclicker.com/VYFJ</p>
+<p>Select all of the following statements which are examples of supervised machine learning</p>
+<ul>
+<li><ol type="A">
+<li>Finding groups of similar properties in a real estate data set.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>Predicting whether someone will have a heart attack or not on the basis of demographic, diet, and clinical measurement.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>Grouping articles on different topics from different news sources (something like the Google News app).</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>Detecting credit card fraud based on examples of fraudulent and non-fraudulent transactions.</li>
+</ol></li>
+<li><ol start="5" type="A">
+<li>Given some measure of employee performance, identify the key factors which are likely to influence their performance.</li>
+</ol></li>
+</ul>
+</section>
+<section id="iclicker-2.3-classification-vs.-regression" class="slide level2 center">
+<h2>iClicker 2.3: Classification vs.&nbsp;Regression</h2>
+<p>Clicker cloud join link: https://join.iclicker.com/VYFJ</p>
+<p>Select all of the following statements which are examples of regression problems</p>
+<ul>
+<li><ol type="A">
+<li>Predicting the price of a house based on features such as number of bedrooms and the year built.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>Predicting if a house will sell or not based on features like the price of the house, number of rooms, etc.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>Predicting percentage grade in CPSC 330 based on past grades.</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>Predicting whether you should bicycle tomorrow or not based on the weather forecast.</li>
+</ol></li>
+<li><ol start="5" type="A">
+<li>Predicting appropriate thermostat temperature based on the wind speed and the number of people in a room.</li>
+</ol></li>
+</ul>
+</section>
+<section id="iclicker-2.5-baselines-and-decision-trees" class="slide level2 center">
+<h2>iClicker 2.5: Baselines and Decision trees</h2>
+<p>iClicker cloud join link: https://join.iclicker.com/VYFJ</p>
+<p>Select all of the following statements which are TRUE.</p>
+<ul>
+<li><ol type="A">
+<li>Change in features (i.e., binarizing features above) would change DummyClassifier predictions.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>predict takes only X as argument whereas fit and score take both X and y as arguments.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>For the decision tree algorithm to work, the feature values must be binary.</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>The prediction in a decision tree works by routing the example from the root to the leaf.</li>
+</ol></li>
+</ul>
 </section>
 <section id="hw2-worksheet-portion" class="slide level2 center">
 <h2>HW2 Worksheet portion</h2>
