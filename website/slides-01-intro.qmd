@@ -128,9 +128,11 @@ train_df, test_df = train_test_split(sms_df, test_size=0.10, random_state=42)
 ### Output
 
 ::: {.scroll-container style="overflow-y: scroll; height: 400px;"}
+
 ```{python}
 HTML(train_df.head().to_html(index=False))
 ```
+
 :::
 
 :::
