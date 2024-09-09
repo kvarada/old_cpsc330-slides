@@ -2,7 +2,8 @@
   {
     "listing": "/slides.html",
     "items": [
-      "/slides-01-intro.html"
+      "/slides-01-intro.html",
+      "/slides-02-terminology-decision-trees.html"
     ]
   }
 ]
