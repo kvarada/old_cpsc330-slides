@@ -18,6 +18,7 @@ website:
     - id: slides
       contents:
         - slides-01-intro.qmd
+        - slides-02-terminology-decision-trees.qmd
 format:
   html:
     theme: [zephyr]
@@ -29,4 +30,4 @@ editor:
 
 execute:
   freeze: auto
-  
+
