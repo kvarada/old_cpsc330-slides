@@ -4,7 +4,7 @@
     "href": "test.html",
     "title": "CPSC 330 Section 102 Slides",
     "section": "",
-    "text": "import os\nimport sys\nimport pandas as pd\nsys.path.append(os.path.join(os.path.abspath(\".\"), \"code\"))\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\ntoy_happiness_df = pd.read_csv( 'data/toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\ncoffee_machine\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n1\n1\n0\nUnhappy\n\n\n1\n0\n1\n0\n1\nUnhappy\n\n\n2\n1\n0\n0\n0\nUnhappy\n\n\n3\n1\n0\n1\n0\nHappy\n\n\n4\n1\n1\n0\n1\nUnhappy\n\n\n5\n1\n0\n1\n0\nHappy\n\n\n6\n1\n1\n1\n1\nHappy\n\n\n\n\n\n\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"\n\n\nX\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\ncoffee_machine\nboss_vegan\n\n\n\n\n0\n0\n1\n1\n0\n\n\n1\n0\n1\n0\n1\n\n\n2\n1\n0\n0\n0\n\n\n3\n1\n0\n1\n0\n\n\n4\n1\n1\n0\n1\n\n\n5\n1\n0\n1\n0\n\n\n6\n1\n1\n1\n1\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\n\n\n\n\n\n\n\n\nfrom plotting_functions import *\n\nX_subset = X[[\"supportive_colleagues\", \"coffee_machine\"]]\nmodel = DecisionTreeClassifier(max_depth=1)\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"coffee_machine\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)\n\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=3)\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"coffee_machine\", y_label=\"start_up\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)"
+    "text": "import os\nimport sys\nimport pandas as pd\nsys.path.append(os.path.join(os.path.abspath(\".\"), \"code\"))\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\ntoy_happiness_df = pd.read_csv( 'data/toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\n\n\n\n\n\n\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"\n\n\nX\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\n\n\n\n\n\n\n\n\ntest_example = [[1, 160000, 0, 1]]\nprint(model.predict(test_example))\n\n['Unhappy']\n\n\n/Users/kvarada/miniforge3/envs/cpsc330/lib/python3.12/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names\n  warnings.warn(\n\n\n\nfrom plotting_functions import *\n\nX_subset = X[[\"supportive_colleagues\", \"salary\"]]\nmodel = DecisionTreeClassifier(max_depth=1, random_state=1)\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)\n\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)"
   },
   {
     "objectID": "slides.html",
@@ -58,7 +58,7 @@
     "href": "slides-02-terminology-decision-trees.html#running-example",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Running example",
-    "text": "Running example\nImagine you’re in the fortunate situation where, after graduating, you have a few job offers and need to decide which one to choose. You want to pick the job that will likely make you the happiest. To help with your decision, you collect data from like-minded people. Here are the first few rows of this toy dataset.\n\ntoy_happiness_df = pd.read_csv(DATA_DIR + 'toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n1\n1\n0\nUnhappy\n\n\n1\n0\n1\n0\n1\nUnhappy\n\n\n2\n1\n0\n0\n0\nUnhappy\n\n\n3\n1\n0\n1\n0\nHappy\n\n\n4\n1\n1\n0\n1\nUnhappy\n\n\n5\n1\n0\n1\n0\nHappy\n\n\n6\n1\n1\n1\n1\nHappy",
+    "text": "Running example\nImagine you’re in the fortunate situation where, after graduating, you have a few job offers and need to decide which one to choose. You want to pick the job that will likely make you the happiest. To help with your decision, you collect data from like-minded people. Here are the first few rows of this toy dataset.\n\ntoy_happiness_df = pd.read_csv(DATA_DIR + 'toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -78,7 +78,7 @@
     "href": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Classification vs. Regression",
-    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n1\n1\n0\nUnhappy\n\n\n1\n0\n1\n0\n1\nUnhappy\n\n\n2\n1\n0\n0\n0\nUnhappy\n\n\n3\n1\n0\n1\n0\nHappy\n\n\n4\n1\n1\n0\n1\nUnhappy\n\n\n5\n1\n0\n1\n0\nHappy\n\n\n6\n1\n1\n1\n1\nHappy",
+    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -98,7 +98,7 @@
     "href": "slides-02-terminology-decision-trees.html#training",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Training",
-    "text": "Training\n\nIn supervised ML, the goal is to learn a function that maps input features (\\(X\\)) to a target (\\(y\\)).\nThe relationship between \\(X\\) and \\(y\\) is often complex, making it difficult to define mathematically.\nWe use algorithms to approximate this complex relationship between \\(X\\) and \\(y\\).\nTraining is the process of applying an algorithm to learn the best function (or model) that maps \\(X\\) to \\(y\\).\nIn this course, I’ll help you build an intuition for how these models work.",
+    "text": "Training\n\nIn supervised ML, the goal is to learn a function that maps input features (\\(X\\)) to a target (\\(y\\)).\nThe relationship between \\(X\\) and \\(y\\) is often complex, making it difficult to define mathematically.\nWe use algorithms to approximate this complex relationship between \\(X\\) and \\(y\\).\nTraining is the process of applying an algorithm to learn the best function (or model) that maps \\(X\\) to \\(y\\).\nIn this course, I’ll help you develop an intuition for how these models work and demonstrate how to use them in a machine learning pipeline.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -118,7 +118,7 @@
     "href": "slides-02-terminology-decision-trees.html#baseline",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Baseline",
-    "text": "Baseline\n\nLet’s try a simplest algorithm of predicting the most popular target!\n\n\nfrom sklearn.dummy import DummyClassifier\nmodel = DummyClassifier(strategy=\"most_frequent\") # Initialize the DummyClassifier to always predict the most frequent class\nmodel.fit(X, y) # Train the model on the feature set X and target variable y\ntoy_happiness_df['dummy_predictions'] = model.predict(X) # Add the predicted values as a new column in the dataframe\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\nfree_coffee\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n0\n1\n1\n0\nUnhappy\nUnhappy\n\n\n1\n0\n1\n0\n1\nUnhappy\nUnhappy\n\n\n2\n1\n0\n0\n0\nUnhappy\nUnhappy\n\n\n3\n1\n0\n1\n0\nHappy\nUnhappy\n\n\n4\n1\n1\n0\n1\nUnhappy\nUnhappy\n\n\n5\n1\n0\n1\n0\nHappy\nUnhappy\n\n\n6\n1\n1\n1\n1\nHappy\nUnhappy",
+    "text": "Baseline\n\nLet’s try a simplest algorithm of predicting the most popular target!\n\n\nfrom sklearn.dummy import DummyClassifier\nmodel = DummyClassifier(strategy=\"most_frequent\") # Initialize the DummyClassifier to always predict the most frequent class\nmodel.fit(X, y) # Train the model on the feature set X and target variable y\ntoy_happiness_df['dummy_predictions'] = model.predict(X) # Add the predicted values as a new column in the dataframe\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\nHappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\nHappy\n\n\n2\n1\n80000\n1\n0\nHappy\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\nHappy",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -138,7 +138,7 @@
     "href": "slides-02-terminology-decision-trees.html#decision-tree-with-sklearn",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Decision tree with sklearn",
-    "text": "Decision tree with sklearn\nLet’s train a simple decision tree on our toy dataset.\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\nmodel = DecisionTreeClassifier(max_depth=2) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=12);",
+    "text": "Decision tree with sklearn\nLet’s train a simple decision tree on our toy dataset.\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=12);",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -148,7 +148,17 @@
     "href": "slides-02-terminology-decision-trees.html#prediction",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Prediction",
-    "text": "Prediction\n\nGiven a new example, how does a decision tree predict the class of this example?\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, start_up =0, coffee_machine = 0, vegan_boss = 1,",
+    "text": "Prediction\n\nGiven a new example, how does a decision tree predict the class of this example?\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
+    "href": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Prediction with sklearn",
+    "text": "Prediction with sklearn\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,\n\n\n\ntest_example = [[1, 60000, 0, 1]]\nprint(\"Model prediction: \", model.predict(test_example))\nplot_tree(model, filled=True, feature_names = X.columns, class_names = [\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\nModel prediction:  ['Unhappy']",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -158,7 +168,7 @@
     "href": "slides-02-terminology-decision-trees.html#training-high-level",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Training (high level)",
-    "text": "Training (high level)\n\nHow many possible questions could we ask in this context?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nstart_up\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n1\n1\n0\n\n\n1\n0\n1\n0\n1\n\n\n2\n1\n0\n0\n0\n\n\n3\n1\n0\n1\n0\n\n\n4\n1\n1\n0\n1\n\n\n5\n1\n0\n1\n0\n\n\n6\n1\n1\n1\n1",
+    "text": "Training (high level)\n\nHow many possible questions could we ask in this context?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -178,7 +188,7 @@
     "href": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
     "title": "Lecture 2: Terminology, Baselines, Decision Trees",
     "section": "Parameters vs. Hyperparameters",
-    "text": "Parameters vs. Hyperparameters\n\nParameters\n\nThe questions (features and thresholds) used to split the data at each node.\nExample: free_coffee &lt;= 0.5 at the root node\n\n\nHyperparameters\n\nSettings that control tree growth, like max_depth, which limits how deep the tree can go.",
+    "text": "Parameters vs. Hyperparameters\n\nParameters\n\nThe questions (features and thresholds) used to split the data at each node.\nExample: salary &lt;= 75000 at the root node\n\n\nHyperparameters\n\nSettings that control tree growth, like max_depth, which limits how deep the tree can go.",
     "crumbs": [
       "Lecture 2: Terminology, Baselines, Decision Trees"
     ]
@@ -458,7 +468,7 @@
     "href": "slides-01-intro.html#building-a-regression-model",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Building a regression model",
-    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000789 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
+    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000848 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
