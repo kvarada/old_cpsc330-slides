@@ -69,17 +69,16 @@ url = "https://scikit-learn.org"
 IPython.display.IFrame(width=1000, height=650, src=url)
 ```
 
-::: {.scroll-container style="overflow-y: scroll; height: 400px;"}
+
 ## Running example 
 
-Imagine that you're in this lucky situation where after graduating, you've a number of a few job offers and you want to make a decision on which one to pick.  
+Imagine you’re in the fortunate situation where, after graduating, you have a few job offers and need to decide which one to choose. You want to pick the job that will likely make you the happiest. To help with your decision, you collect data from like-minded people. Here are the first few rows of this toy dataset.
 
 ```{python}
 #| echo: true
 toy_happiness_df = pd.read_csv(DATA_DIR + 'toy_job_happiness.csv')
 toy_happiness_df
 ```
-:::
 
 # Terminology
 
@@ -95,7 +94,7 @@ toy_happiness_df
 - Is this a **classification** problem or a **regression** problem?  
 
 ```{python}
-toy_happiness_df.head()
+toy_happiness_df
 ```
 
 ## Prediction vs. Inference
@@ -111,24 +110,27 @@ toy_happiness_df.head()
 - **Training** is the process of applying an algorithm to learn the best function (or model) that maps $X$ to $y$. 
 - In this course, I'll help you build an intuition for how these models work. 
 
-::: {.scroll-container style="overflow-y: scroll; height: 400px;"}
+## Separating $X$ and $y$
+
+- In order to train a model we need to separate $X$ and $y$ from the dataframe. 
+```{python}
+#| echo: true
+X = toy_happiness_df.drop(columns=["happy?"]) # Extract the feature set by removing the target column "happy?"
+y = toy_happiness_df["happy?"] # Extract the target variable "happy?"
+```
+
+
 ## Baseline
-- What's the simplest possible algorithm? 
-  - Predict the most popular target.  
+- Let's try a simplest algorithm of predicting the most popular target! 
 
 ```{python}
 #| echo: true
 from sklearn.dummy import DummyClassifier
-
-X = toy_happiness_df.drop(columns=["happy?"])
-y = toy_happiness_df["happy?"]
-
-model = DummyClassifier(strategy="most_frequent") # Define a class object of the model 
-model.fit(X, y)
-toy_happiness_df['dummy_predictions'] = model.predict(X)
+model = DummyClassifier(strategy="most_frequent") # Initialize the DummyClassifier to always predict the most frequent class
+model.fit(X, y) # Train the model on the feature set X and target variable y
+toy_happiness_df['dummy_predictions'] = model.predict(X) # Add the predicted values as a new column in the dataframe
 toy_happiness_df
 ```
-:::
 
 # Decision trees 
 
@@ -148,26 +150,24 @@ from sklearn.tree import plot_tree
 
 model = DecisionTreeClassifier(max_depth=2) # Create a class object
 model.fit(X, y)
-plot_tree(model, filled=True, feature_names = X.columns, impurity = False, fontsize=16);
+plot_tree(model, filled=True, feature_names = X.columns, class_names=["Happy", "Unhappy"], impurity = False, fontsize=12);
 
 ```
 
 ## Prediction 
 - Given a new example, how does a decision tree predict the class of this example?  
 - What would be the prediction for the example below using the tree above? 
-  - supportive_colleagues = 0, hours_flexibility = 0, start_up =1, coffee_machine = 1, vegan_boss = 1,  
+  - supportive_colleagues = 1, start_up =0, coffee_machine = 0, vegan_boss = 1,  
 ```{python}
-plot_tree(model, filled=True, feature_names = X.columns, impurity = False, fontsize=16);
+plot_tree(model, filled=True, feature_names = X.columns, class_names = ["Happy", "Unhappy"], impurity = False, fontsize=12);
 ```
 
-::: {.scroll-container style="overflow-y: scroll; height: 400px;"}
 ## Training (high level)
 
 - How many possible questions could we ask in this context?
 ```{python}
 X
 ```
-:::
 
 ## Training (high level)
 - Decision tree learning is a search process to find the "best" tree among many possible ones.
@@ -177,27 +177,27 @@ X
 ## Parameters vs. Hyperparameters 
 - Parameters 
   - The questions (features and thresholds) used to split the data at each node.
-  - Example: supportive_colleagues <= 0.5 at the root node  
+  - Example: free_coffee <= 0.5 at the root node  
 - Hyperparameters
   - Settings that control tree growth, like `max_depth`, which limits how deep the tree can go.
 
 ## Decision boundary with `max_depth=1`
 ```{python}
-X_subset = X[["supportive_colleagues", "coffee_machine"]]
+X_subset = X[["supportive_colleagues", "free_coffee"]]
 model = DecisionTreeClassifier(max_depth=1)
 model.fit(X_subset.values, y)
 plot_tree_decision_boundary_and_tree(
-    model, X_subset, y, x_label="supportive_colleagues", y_label="coffee_machine", fontsize=12, class_names = ["Happy", "Unhappy"]
+    model, X_subset, y, x_label="supportive_colleagues", y_label="free_coffee", fontsize=12, class_names = ["Happy", "Unhappy"]
 )
 ```
 
 ## Decision boundary with `max_depth=2`
 ```{python}
-X_subset = X[["supportive_colleagues", "coffee_machine"]]
+X_subset = X[["supportive_colleagues", "free_coffee"]]
 model = DecisionTreeClassifier(max_depth=2)
 model.fit(X_subset.values, y)
 plot_tree_decision_boundary_and_tree(
-    model, X_subset, y, x_label="supportive_colleagues", y_label="coffee_machine", fontsize=12, class_names = ["Happy", "Unhappy"]
+    model, X_subset, y, x_label="supportive_colleagues", y_label="free_coffee", fontsize=12, class_names = ["Happy", "Unhappy"]
 )
 ```
 
