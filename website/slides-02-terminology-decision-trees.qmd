@@ -63,6 +63,7 @@ In the first part of this course, we'll focus on supervised machine learning.
 
 - There are many frameworks to do do machine learning. 
 - We'll mainly be using [`scikit-learn` framework](https://scikit-learn.org/stable/). 
+
 ```{python}
 import IPython
 url = "https://scikit-learn.org"
@@ -108,7 +109,7 @@ toy_happiness_df
 - The relationship between $X$ and $y$ is often complex, making it difficult to  define mathematically.
 - We use algorithms to approximate this complex relationship between $X$ and $y$.
 - **Training** is the process of applying an algorithm to learn the best function (or model) that maps $X$ to $y$. 
-- In this course, I'll help you build an intuition for how these models work. 
+- In this course, I'll help you develop an intuition for how these models work and demonstrate how to use them in a machine learning pipeline.
 
 ## Separating $X$ and $y$
 
@@ -148,7 +149,7 @@ Let's train a simple decision tree on our toy dataset.
 from sklearn.tree import DecisionTreeClassifier # import the classifier
 from sklearn.tree import plot_tree
 
-model = DecisionTreeClassifier(max_depth=2) # Create a class object
+model = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object
 model.fit(X, y)
 plot_tree(model, filled=True, feature_names = X.columns, class_names=["Happy", "Unhappy"], impurity = False, fontsize=12);
 
@@ -157,10 +158,21 @@ plot_tree(model, filled=True, feature_names = X.columns, class_names=["Happy", "
 ## Prediction 
 - Given a new example, how does a decision tree predict the class of this example?  
 - What would be the prediction for the example below using the tree above? 
-  - supportive_colleagues = 1, start_up =0, coffee_machine = 0, vegan_boss = 1,  
+  - supportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,  
 ```{python}
 plot_tree(model, filled=True, feature_names = X.columns, class_names = ["Happy", "Unhappy"], impurity = False, fontsize=12);
 ```
+
+## Prediction with `sklearn`
+- What would be the prediction for the example below using the tree above? 
+  - supportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,  
+```{python}
+#| echo: true
+test_example = [[1, 60000, 0, 1]]
+print("Model prediction: ", model.predict(test_example))
+plot_tree(model, filled=True, feature_names = X.columns, class_names = ["Happy", "Unhappy"], impurity = False, fontsize=9);
+```
+
 
 ## Training (high level)
 
@@ -177,27 +189,27 @@ X
 ## Parameters vs. Hyperparameters 
 - Parameters 
   - The questions (features and thresholds) used to split the data at each node.
-  - Example: free_coffee <= 0.5 at the root node  
+  - Example: salary <= 75000 at the root node  
 - Hyperparameters
   - Settings that control tree growth, like `max_depth`, which limits how deep the tree can go.
 
 ## Decision boundary with `max_depth=1`
 ```{python}
-X_subset = X[["supportive_colleagues", "free_coffee"]]
-model = DecisionTreeClassifier(max_depth=1)
+X_subset = X[["supportive_colleagues", "salary"]]
+model = DecisionTreeClassifier(max_depth=1, random_state=1)
 model.fit(X_subset.values, y)
 plot_tree_decision_boundary_and_tree(
-    model, X_subset, y, x_label="supportive_colleagues", y_label="free_coffee", fontsize=12, class_names = ["Happy", "Unhappy"]
+    model, X_subset, y, x_label="supportive_colleagues", y_label="salary", fontsize=12, class_names = ["Happy", "Unhappy"]
 )
 ```
 
 ## Decision boundary with `max_depth=2`
 ```{python}
-X_subset = X[["supportive_colleagues", "free_coffee"]]
-model = DecisionTreeClassifier(max_depth=2)
+X_subset = X[["supportive_colleagues", "salary"]]
+model = DecisionTreeClassifier(max_depth=2, random_state=1)
 model.fit(X_subset.values, y)
 plot_tree_decision_boundary_and_tree(
-    model, X_subset, y, x_label="supportive_colleagues", y_label="free_coffee", fontsize=12, class_names = ["Happy", "Unhappy"]
+    model, X_subset, y, x_label="supportive_colleagues", y_label="salary", fontsize=12, class_names = ["Happy", "Unhappy"]
 )
 ```
 
