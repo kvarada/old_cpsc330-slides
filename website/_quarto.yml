@@ -19,6 +19,7 @@ website:
       contents:
         - slides-01-intro.qmd
         - slides-02-terminology-decision-trees.qmd
+        - slides-03-ml-fundamentals.qmd
 format:
   html:
     theme: [zephyr]
