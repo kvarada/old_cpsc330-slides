@@ -10,7 +10,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.56">
 
-  <title>CPSC 330 Section 102 Slides – Lecture 3: ML fundamentals</title>
+  <title>CPSC 330 Section 102 Slides – CPSC 330 Lecture 3: ML fundamentals</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -325,7 +325,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Lecture 3: ML fundamentals</h1>
+  <h1 class="title">CPSC 330 Lecture 3: ML fundamentals</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -359,28 +359,19 @@
 <li>Cross-validation</li>
 </ul>
 </section>
-<section id="recap-1" class="slide level2 center">
-<h2>Recap</h2>
-<p>A typical sequence of steps to train supervised machine learning models</p>
-<ul>
-<li>training the model on the train split</li>
-<li>tuning hyperparamters using the validation split</li>
-<li>checking the generalization performance on the test split</li>
-</ul>
-</section>
 <section id="iclicker-3.1" class="slide level2 center">
 <h2>iClicker 3.1</h2>
-<p>Clicker cloud join link: https://join.iclicker.com/VYFJ</p>
-<p>Select all of the following statements which are TRUE.</p>
+<p>Clicker cloud join link: <strong>https://join.iclicker.com/VYFJ</strong></p>
+<p><strong>Select all of the following statements which are TRUE.</strong></p>
 <ul>
 <li><ol type="A">
-<li>A decision tree model with no depth (the default max_depth in sklearn) is likely to perform very well on the deployment data.</li>
+<li>A decision tree model with no depth (the default <code>max_depth</code> in <code>sklearn</code>) is likely to perform very well on the deployment data.</li>
 </ol></li>
 <li><ol start="2" type="A">
 <li>Data splitting helps us assess how well our model would generalize.</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>Deployment data is only scored once.</li>
+<li>Deployment data is scored only once.</li>
 </ol></li>
 <li><ol start="4" type="A">
 <li>Validation data could be used for hyperparameter optimization.</li>
@@ -392,15 +383,25 @@
 </section>
 <section id="iclicker-3.2" class="slide level2 center">
 <h2>iClicker 3.2</h2>
-<p>Clicker cloud join link: https://join.iclicker.com/VYFJ</p>
-<p>Select all of the following statements which are TRUE.</p>
-<ol type="A">
+<p>Clicker cloud join link: <strong>https://join.iclicker.com/VYFJ</strong></p>
+<p><strong>Select all of the following statements which are TRUE.</strong></p>
+<ul>
+<li><ol type="A">
 <li><span class="math inline">\(k\)</span>-fold cross-validation calls fit <span class="math inline">\(k\)</span> times</li>
+</ol></li>
+<li><ol start="2" type="A">
 <li>We use cross-validation to get a more robust estimate of model performance.</li>
+</ol></li>
+<li><ol start="3" type="A">
 <li>If the mean train accuracy is much higher than the mean cross-validation accuracy it’s likely to be a case of overfitting.</li>
+</ol></li>
+<li><ol start="4" type="A">
 <li>The fundamental tradeoff of ML states that as training error goes down, validation error goes up.</li>
+</ol></li>
+<li><ol start="5" type="A">
 <li>A decision stump on a complicated classification problem is likely to underfit.</li>
-</ol>
+</ol></li>
+</ul>
 </section>
 <section id="class-demo" class="title-slide slide level1 center">
 <h1><a href="https://github.com/UBC-CS/cpsc330-2024W1/blob/main/lectures/102-Varada-lectures/class_demos/demo_03-ml-fundamentals.ipynb">Class demo</a></h1>
