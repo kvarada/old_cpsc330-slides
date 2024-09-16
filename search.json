@@ -1,10 +1,73 @@
 [
   {
-    "objectID": "test.html",
-    "href": "test.html",
-    "title": "CPSC 330 Section 102 Slides",
-    "section": "",
-    "text": "import os\nimport sys\nimport pandas as pd\nsys.path.append(os.path.join(os.path.abspath(\".\"), \"code\"))\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\ntoy_happiness_df = pd.read_csv( 'data/toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\n\n\n\n\n\n\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"\n\n\nX\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\n\n\n\n\n\n\n\n\ntest_example = [[0, 160000, 0, 1]]\nprint(model.predict(test_example))\n\n['Unhappy']\n\n\n/Users/kvarada/miniforge3/envs/cpsc330/lib/python3.12/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names\n  warnings.warn(\n\n\n\nfrom plotting_functions import *\n\nX_subset = X[[\"supportive_colleagues\", \"salary\"]]\nmodel = DecisionTreeClassifier(max_depth=1, random_state=1)\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)\n\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)"
+    "objectID": "slides-04-kNNs-SVM-RBF.html#announcements",
+    "href": "slides-04-kNNs-SVM-RBF.html#announcements",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Announcements",
+    "text": "Announcements\n\nhw2 was due yesterday.\nHomework 3 (hw3) has been released (Due: Oct 1st, 11:59pm)\n\nYou are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.\nYou can work in pairs for this assignment.\n\nIf you were on the waitlist, you should now know your course enrollment status. Registration for tutorials is not mandatory; they are optional and will follow an office-hour format. You are free to attend any tutorial session of your choice.\nEnsure to complete the syllabus quiz.\nThe lecture notes within these notebooks align with the content presented in the videos. Even though we do not cover all the content from these notebooks during lectures, it’s your responsibility to go through them on your own.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#recap",
+    "href": "slides-04-kNNs-SVM-RBF.html#recap",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Recap",
+    "text": "Recap\nWhich of the following scenarios do NOT necessarily imply overfitting?\n\n\nTraining accuracy is 0.98 while validation accuracy is 0.60.\n\n\nThe model is too specific to the training data.\n\n\nThe decision boundary of a classifier is wiggly and highly irregular.\n\n\nTraining and validation accuracies are both approximately 0.88.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#recap-1",
+    "href": "slides-04-kNNs-SVM-RBF.html#recap-1",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Recap",
+    "text": "Recap\nWhich of the following statements about overfitting is true?\n\n\nOverfitting is always beneficial for model performance on unseen data.\n\n\nThere is always going to be some overfitting in a given problem.\n\n\nOverfitting ensures the model will perform well in real-world scenarios.\n\n\nOverfitting occurs when the model learns the training data too closely, including its noise and outliers.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#recap-2",
+    "href": "slides-04-kNNs-SVM-RBF.html#recap-2",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Recap",
+    "text": "Recap\nHow might one address the issue of underfitting in a machine learning model.\n\n\nIntroduce more noise to the training data.\n\n\nRemove features that might be relevant to the prediction.\n\n\nIncrease the model’s complexity, possibly by adding more parameter or features\n\n\nUse a smaller dataset for training.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#recap-3",
+    "href": "slides-04-kNNs-SVM-RBF.html#recap-3",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Recap",
+    "text": "Recap\n\nWhy do we split the data?\nWhat are train/valid/test splits?\nWhat are the benefits of cross-validation?\nWhat is overfitting?\nWhat’s the fundamental trade-off in supervised machine learning?\nWhat is the golden rule of machine learning?",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#iclicker-4.1",
+    "href": "slides-04-kNNs-SVM-RBF.html#iclicker-4.1",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "iClicker 4.1",
+    "text": "iClicker 4.1\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nAnalogy-based models find examples from the test set that are most similar to the query example we are predicting.\n\n\nEuclidean distance will always have a non-negative value.\n\n\nWith \\(k\\)-NN, setting the hyperparameter \\(k\\) to larger values typically reduces training error.\n\n\nSimilar to decision trees, \\(k\\)-NNs finds a small set of good features.\n\n\nIn \\(k\\)-NN, with \\(k &gt; 1\\), the classification of the closest neighbour to the test example always contributes the most to the prediction.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#iclicker-4.2",
+    "href": "slides-04-kNNs-SVM-RBF.html#iclicker-4.2",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "iClicker 4.2",
+    "text": "iClicker 4.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\n\\(k\\)-NN may perform poorly in high-dimensional space (say, d &gt; 1000).\n\n\nIn sklearn’s SVC classifier, large values of gamma tend to result in higher training score but probably lower validation score.\n\n\nIf we increase both gamma and C, we can’t be certain if the model becomes more complex or less complex.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
   },
   {
     "objectID": "index.html",
@@ -228,7 +291,7 @@
     "href": "slides-01-intro.html#building-a-regression-model",
     "title": "Lecture 1: Introduction to CPSC 330",
     "section": "Building a regression model",
-    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000848 seconds.\nYou can set `force_row_wise=true` to remove the overhead.\nAnd if memory is not enough, you can set `force_col_wise=true`.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
+    "text": "Building a regression model\n\nfrom lightgbm.sklearn import LGBMRegressor\n\nX_train, y_train = train_df.drop(columns= [\"target\"]), train_df[\"target\"]\nX_test, y_test = test_df.drop(columns= [\"target\"]), train_df[\"target\"]\n\nmodel = LGBMRegressor()\nmodel.fit(X_train, y_train);\n\n[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000819 seconds.\nYou can set `force_col_wise=true` to remove the overhead.\n[LightGBM] [Info] Total Bins 2333\n[LightGBM] [Info] Number of data points in the train set: 17290, number of used features: 18\n[LightGBM] [Info] Start training from score 539762.702545",
     "crumbs": [
       "Lecture 1: Introduction to CPSC 330"
     ]
@@ -698,46 +761,56 @@
     "href": "slides.html",
     "title": "Overview",
     "section": "",
-    "text": "Title\n\n\nDescription\n\n\n\n\n\n\nLecture 1: Introduction to CPSC 330\n\n\nWhat is machine learning, types of machine learning, learning to navigate through the course materials, getting familiar with the course policies\n\n\n\n\nLecture 2: Terminology, Baselines, Decision Trees\n\n\nSupervised machine learning terminology: Features, target, examples, training, parameters and hyperparameters, Decision boundary, classification vs. regression, inference vs. prediction, accuracy vs. error, baselines, intuition of decision trees\n\n\n\n\nCPSC 330 Lecture 3: ML fundamentals\n\n\ngeneralization, data splitting, cross-validation, overfitting, underfitting, the fundamental tradeoff, the golden rule\n\n\n\n\n\nNo matching items"
+    "text": "Title\n\n\nDescription\n\n\n\n\n\n\nLecture 1: Introduction to CPSC 330\n\n\nWhat is machine learning, types of machine learning, learning to navigate through the course materials, getting familiar with the course policies\n\n\n\n\nLecture 2: Terminology, Baselines, Decision Trees\n\n\nSupervised machine learning terminology: Features, target, examples, training, parameters and hyperparameters, Decision boundary, classification vs. regression, inference vs. prediction, accuracy vs. error, baselines, intuition of decision trees\n\n\n\n\nLecture 3: ML fundamentals\n\n\ngeneralization, data splitting, overfitting, underfitting, the fundamental tradeoff, the golden rule\n\n\n\n\nLecture 4: \\(k\\)-nearest neighbours and SVM RBFs\n\n\nintroduction to KNNs, hyperparameter n_neighbours or \\(k\\), C and gamma hyperparameters of SVM RBF, decision boundaries with different values of hyperparameters.\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides-03-ml-fundamentals.html#announcements",
     "href": "slides-03-ml-fundamentals.html#announcements",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "title": "Lecture 3: ML fundamentals",
     "section": "Announcements",
     "text": "Announcements\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nYou are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.\nGroup submissions are not allowed for this assignment.\n\nAdvice on keeping up with the material\n\nPractice!\nMake sure you run the lecture notes on your laptop and experiment with the code.\nStart early on homework assignments.\n\nIf you are still on the waitlist, it’s your responsibility to keep up with the material and submit assignments.\nLast day to drop without a W standing: Sept 16, 2023",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 3: ML fundamentals"
     ]
   },
   {
     "objectID": "slides-03-ml-fundamentals.html#recap",
     "href": "slides-03-ml-fundamentals.html#recap",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "title": "Lecture 3: ML fundamentals",
     "section": "Recap",
     "text": "Recap\n\nImportance of generalization in supervised machine learning\nData splitting as a way to approximate generalization error\nTrain, test, validation, deployment data\nOverfitting, underfitting, the fundamental tradeoff, and the golden rule.\nCross-validation",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 3: ML fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides-03-ml-fundamentals.html#recap-1",
+    "href": "slides-03-ml-fundamentals.html#recap-1",
+    "title": "Lecture 3: ML fundamentals",
+    "section": "Recap",
+    "text": "Recap\nA typical sequence of steps to train supervised machine learning models\n\ntraining the model on the train split\ntuning hyperparamters using the validation split\nchecking the generalization performance on the test split",
+    "crumbs": [
+      "Lecture 3: ML fundamentals"
     ]
   },
   {
     "objectID": "slides-03-ml-fundamentals.html#iclicker-3.1",
     "href": "slides-03-ml-fundamentals.html#iclicker-3.1",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "title": "Lecture 3: ML fundamentals",
     "section": "iClicker 3.1",
-    "text": "iClicker 3.1\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nA decision tree model with no depth (the default max_depth in sklearn) is likely to perform very well on the deployment data.\n\n\nData splitting helps us assess how well our model would generalize.\n\n\nDeployment data is scored only once.\n\n\nValidation data could be used for hyperparameter optimization.\n\n\nIt’s recommended that data be shuffled before splitting it into train and test sets.",
+    "text": "iClicker 3.1\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nA decision tree model with no depth (the default max_depth in sklearn) is likely to perform very well on the deployment data.\n\n\nData splitting helps us assess how well our model would generalize.\n\n\nDeployment data is only scored once.\n\n\nValidation data could be used for hyperparameter optimization.\n\n\nIt’s recommended that data be shuffled before splitting it into train and test sets.",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 3: ML fundamentals"
     ]
   },
   {
     "objectID": "slides-03-ml-fundamentals.html#iclicker-3.2",
     "href": "slides-03-ml-fundamentals.html#iclicker-3.2",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "title": "Lecture 3: ML fundamentals",
     "section": "iClicker 3.2",
-    "text": "iClicker 3.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\n\\(k\\)-fold cross-validation calls fit \\(k\\) times\n\n\nWe use cross-validation to get a more robust estimate of model performance.\n\n\nIf the mean train accuracy is much higher than the mean cross-validation accuracy it’s likely to be a case of overfitting.\n\n\nThe fundamental tradeoff of ML states that as training error goes down, validation error goes up.\n\n\nA decision stump on a complicated classification problem is likely to underfit.",
+    "text": "iClicker 3.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\\(k\\)-fold cross-validation calls fit \\(k\\) times\nWe use cross-validation to get a more robust estimate of model performance.\nIf the mean train accuracy is much higher than the mean cross-validation accuracy it’s likely to be a case of overfitting.\nThe fundamental tradeoff of ML states that as training error goes down, validation error goes up.\nA decision stump on a complicated classification problem is likely to underfit.",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 3: ML fundamentals"
     ]
   }
 ]
