@@ -17,17 +17,16 @@ format:
 ## Announcements 
 
 - hw2 was due yesterday.
-- Homework 3 (hw3) has been released (Due: Oct 1st, 11:59pm)
-  - You are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.
+- Syllabus quiz due date is September 19th, 11:59 pm. 
+- Homework 3 (hw3) has been released (Due: Oct 1st, 11:59 pm)
   - You can work in pairs for this assignment. 
 - If you were on the waitlist, you should now know your course enrollment status. Registration for tutorials is not mandatory; they are optional and will follow an office-hour format. You are free to attend any tutorial session of your choice.
-- Ensure to complete the syllabus quiz. 
 - The lecture notes within these notebooks align with the content presented in the videos. Even though we do not cover all the content from these notebooks during lectures, it’s your responsibility to go through them on your own.
 
 
 ## Recap
 
-Which of the following scenarios do NOT necessarily imply overfitting? 
+Which of the following scenarios do **NOT necessarily imply overfitting**? 
 
 - (A) Training accuracy is 0.98 while validation accuracy is 0.60.
 - (B) The model is too specific to the training data. 
@@ -36,33 +35,45 @@ Which of the following scenarios do NOT necessarily imply overfitting?
 
 ## Recap
 
-Which of the following statements about overfitting is true? 
+Which of the following statements about **overfitting** is true? 
 
 - (A) Overfitting is always beneficial for model performance on unseen data.
-- (B) There is always going to be some overfitting in a given problem.
+- (B) Some degree of overfitting is common in most real-world problems. 
 - (C) Overfitting ensures the model will perform well in real-world scenarios.
 - (D) Overfitting occurs when the model learns the training data too closely, including its noise and outliers.   
 
 
 ## Recap
 
-How might one address the issue of underfitting in a machine learning model. 
+How might one address the issue of **underfitting** in a machine learning model. 
 
 - (A) Introduce more noise to the training data. 
 - (B) Remove features that might be relevant to the prediction. 
 - (C) Increase the model's complexity, possibly by adding more parameter or features
 - (D) Use a smaller dataset for training. 
 
+## Overfitting and underfitting 
+
+- An **overfit model** matches the training set so closely that it fails to make correct predictions on new unseen data.  
+- An **underfit model** is too simple and does not even make good predictions on the training data 
+
+![](img/underfit-overfit-google-developer.png){fig-align="center"}
+
+[Source](https://developers.google.com/machine-learning/crash-course/overfitting/overfitting)
+
 
 ## Recap 
 - Why do we split the data?
 - What are train/valid/test splits? 
 - What are the benefits of cross-validation?
-- What is overfitting?
 - What’s the fundamental trade-off in supervised machine learning?
 - What is the golden rule of machine learning?
 
+## Recap: The fundamental tradeoff
 
+As you increase the model complexity, training score tends to go up and the gap between train and validation scores tends to go up.  
+
+![](img/malp_0201.png){fig-align="center"}
 
 
 ## iClicker 4.1
@@ -86,6 +97,36 @@ Clicker cloud join link: **https://join.iclicker.com/VYFJ**
 - (B) In sklearn’s SVC classifier, large values of `gamma` tend to result in higher training score but probably lower validation score. 
 - (C) If we increase both `gamma` and `C`, we can't be certain if the model becomes more complex or less complex.
 
+
+## Similarity-based algorithms 
+- Use similarity or distance metrics to predict targets.
+- Examples: $k$-nearest neighbors, Support Vector Machines (SVMs) with RBF Kernel.
+
+## $k$-nearest neighbours
+- Classifies an object based on the majority label among its $k$ closest neighbors. 
+- Main hyperparameter: $k$ or `n_neighbors` in `sklearn`
+- Distance Metrics: Euclidean
+- Strengths: simple and intuitive, can learn complex decision boundaries
+- Challenges: Sensitive to the choice of distance metric and **scaling** (coming up).
+
+## Curse of dimensionality 
+- As dimensionality increases, the volume of the space increases exponentially, making the data sparse.
+- Distance metrics lose meaning
+    - Accidental similarity swamps out meaningful similarity
+    - All points become almost equidistant.
+- Overfitting becomes likely: Harder to generalize with high-dimensional data.
+- How to deal with this? 
+    - Dimensionality reduction (PCA) (not covered in this course)
+    - Feature selection techniques.
+
+## SVMs with RBF kernel 
+- RBF Kernel: Radial Basis Function, a way to transform data into higher dimensions implicitly.
+- Strengths 
+    - Effective in high-dimensional and sparse data
+    - Good performance on non-linear problems.
+- Hyperparameters:
+    - C$: Regularization parameter (trade-off between correct classification of training examples and maximization of the decision margin).
+	- $\gamma$: Defines how far the influence of a single training example reaches.
 
 ## Intuition of `C` and `gamma` in SVM RBF
 - `C` (Regularization): Controls the trade-off between perfect training accuracy and having a simpler decision boundary. 
