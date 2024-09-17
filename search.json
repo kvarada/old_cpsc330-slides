@@ -745,7 +745,7 @@
     "href": "slides-04-kNNs-SVM-RBF.html#announcements",
     "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
     "section": "Announcements",
-    "text": "Announcements\n\nhw2 was due yesterday.\nHomework 3 (hw3) has been released (Due: Oct 1st, 11:59pm)\n\nYou are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.\nYou can work in pairs for this assignment.\n\nIf you were on the waitlist, you should now know your course enrollment status. Registration for tutorials is not mandatory; they are optional and will follow an office-hour format. You are free to attend any tutorial session of your choice.\nEnsure to complete the syllabus quiz.\nThe lecture notes within these notebooks align with the content presented in the videos. Even though we do not cover all the content from these notebooks during lectures, it’s your responsibility to go through them on your own.",
+    "text": "Announcements\n\nhw2 was due yesterday.\nSyllabus quiz due date is September 19th, 11:59 pm.\nHomework 3 (hw3) has been released (Due: Oct 1st, 11:59 pm)\n\nYou can work in pairs for this assignment.\n\nIf you were on the waitlist, you should now know your course enrollment status. Registration for tutorials is not mandatory; they are optional and will follow an office-hour format. You are free to attend any tutorial session of your choice.\nThe lecture notes within these notebooks align with the content presented in the videos. Even though we do not cover all the content from these notebooks during lectures, it’s your responsibility to go through them on your own.",
     "crumbs": [
       "Lecture 4: $k$-nearest neighbours and SVM RBFs"
     ]
@@ -765,7 +765,7 @@
     "href": "slides-04-kNNs-SVM-RBF.html#recap-1",
     "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
     "section": "Recap",
-    "text": "Recap\nWhich of the following statements about overfitting is true?\n\n\nOverfitting is always beneficial for model performance on unseen data.\n\n\nThere is always going to be some overfitting in a given problem.\n\n\nOverfitting ensures the model will perform well in real-world scenarios.\n\n\nOverfitting occurs when the model learns the training data too closely, including its noise and outliers.",
+    "text": "Recap\nWhich of the following statements about overfitting is true?\n\n\nOverfitting is always beneficial for model performance on unseen data.\n\n\nSome degree of overfitting is common in most real-world problems.\n\n\nOverfitting ensures the model will perform well in real-world scenarios.\n\n\nOverfitting occurs when the model learns the training data too closely, including its noise and outliers.",
     "crumbs": [
       "Lecture 4: $k$-nearest neighbours and SVM RBFs"
     ]
@@ -781,11 +781,31 @@
     ]
   },
   {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#overfitting-and-underfitting",
+    "href": "slides-04-kNNs-SVM-RBF.html#overfitting-and-underfitting",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Overfitting and underfitting",
+    "text": "Overfitting and underfitting\n\nAn overfit model matches the training set so closely that it fails to make correct predictions on new unseen data.\n\nAn underfit model is too simple and does not even make good predictions on the training data\n\n\nSource",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
     "objectID": "slides-04-kNNs-SVM-RBF.html#recap-3",
     "href": "slides-04-kNNs-SVM-RBF.html#recap-3",
     "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
     "section": "Recap",
-    "text": "Recap\n\nWhy do we split the data?\nWhat are train/valid/test splits?\nWhat are the benefits of cross-validation?\nWhat is overfitting?\nWhat’s the fundamental trade-off in supervised machine learning?\nWhat is the golden rule of machine learning?",
+    "text": "Recap\n\nWhy do we split the data?\nWhat are train/valid/test splits?\nWhat are the benefits of cross-validation?\nWhat’s the fundamental trade-off in supervised machine learning?\nWhat is the golden rule of machine learning?",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#recap-the-fundamental-tradeoff",
+    "href": "slides-04-kNNs-SVM-RBF.html#recap-the-fundamental-tradeoff",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Recap: The fundamental tradeoff",
+    "text": "Recap: The fundamental tradeoff\nAs you increase the model complexity, training score tends to go up and the gap between train and validation scores tends to go up.",
     "crumbs": [
       "Lecture 4: $k$-nearest neighbours and SVM RBFs"
     ]
@@ -806,6 +826,46 @@
     "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
     "section": "iClicker 4.2",
     "text": "iClicker 4.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\n\\(k\\)-NN may perform poorly in high-dimensional space (say, d &gt; 1000).\n\n\nIn sklearn’s SVC classifier, large values of gamma tend to result in higher training score but probably lower validation score.\n\n\nIf we increase both gamma and C, we can’t be certain if the model becomes more complex or less complex.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#similarity-based-algorithms",
+    "href": "slides-04-kNNs-SVM-RBF.html#similarity-based-algorithms",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Similarity-based algorithms",
+    "text": "Similarity-based algorithms\n\nUse similarity or distance metrics to predict targets.\nExamples: \\(k\\)-nearest neighbors, Support Vector Machines (SVMs) with RBF Kernel.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#k-nearest-neighbours",
+    "href": "slides-04-kNNs-SVM-RBF.html#k-nearest-neighbours",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "\\(k\\)-nearest neighbours",
+    "text": "\\(k\\)-nearest neighbours\n\nClassifies an object based on the majority label among its \\(k\\) closest neighbors.\nMain hyperparameter: \\(k\\) or n_neighbors in sklearn\nDistance Metrics: Euclidean\nStrengths: simple and intuitive, can learn complex decision boundaries\nChallenges: Sensitive to the choice of distance metric and scaling (coming up).",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#curse-of-dimensionality",
+    "href": "slides-04-kNNs-SVM-RBF.html#curse-of-dimensionality",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Curse of dimensionality",
+    "text": "Curse of dimensionality\n\nAs dimensionality increases, the volume of the space increases exponentially, making the data sparse.\nDistance metrics lose meaning\n\nAccidental similarity swamps out meaningful similarity\nAll points become almost equidistant.\n\nOverfitting becomes likely: Harder to generalize with high-dimensional data.\nHow to deal with this?\n\nDimensionality reduction (PCA) (not covered in this course)\nFeature selection techniques.",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#svms-with-rbf-kernel",
+    "href": "slides-04-kNNs-SVM-RBF.html#svms-with-rbf-kernel",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "SVMs with RBF kernel",
+    "text": "SVMs with RBF kernel\n\nRBF Kernel: Radial Basis Function, a way to transform data into higher dimensions implicitly.\nStrengths\n\nEffective in high-dimensional and sparse data\nGood performance on non-linear problems.\n\nHyperparameters:\n\nC$: Regularization parameter (trade-off between correct classification of training examples and maximization of the decision margin).\n\\(\\gamma\\): Defines how far the influence of a single training example reaches.",
     "crumbs": [
       "Lecture 4: $k$-nearest neighbours and SVM RBFs"
     ]
