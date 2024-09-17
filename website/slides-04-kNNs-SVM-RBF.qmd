@@ -1,0 +1,215 @@
+---
+title: 'Lecture 4: $k$-nearest neighbours and SVM RBFs'
+description: Supervised Machine Learning Fundamentals
+description-short: 'introduction to KNNs, hyperparameter `n_neighbours` or $k$, `C` and `gamma` hyperparameters of SVM RBF, decision boundaries with different values of hyperparameters.'
+format:
+  revealjs:
+    embed-resources: true
+    slide-number: true
+    smaller: true
+    center: true
+    logo: img/UBC-CS-logo.png
+    resources:
+      - data/
+      - img/  
+---
+
+## Announcements 
+
+- hw2 was due yesterday.
+- Homework 3 (hw3) has been released (Due: Oct 1st, 11:59pm)
+  - You are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.
+  - You can work in pairs for this assignment. 
+- If you were on the waitlist, you should now know your course enrollment status. Registration for tutorials is not mandatory; they are optional and will follow an office-hour format. You are free to attend any tutorial session of your choice.
+- Ensure to complete the syllabus quiz. 
+- The lecture notes within these notebooks align with the content presented in the videos. Even though we do not cover all the content from these notebooks during lectures, it’s your responsibility to go through them on your own.
+
+
+## Recap
+
+Which of the following scenarios do NOT necessarily imply overfitting? 
+
+- (A) Training accuracy is 0.98 while validation accuracy is 0.60.
+- (B) The model is too specific to the training data. 
+- (C) The decision boundary of a classifier is wiggly and highly irregular.
+- (D) Training and validation accuracies are both approximately 0.88. 
+
+## Recap
+
+Which of the following statements about overfitting is true? 
+
+- (A) Overfitting is always beneficial for model performance on unseen data.
+- (B) There is always going to be some overfitting in a given problem.
+- (C) Overfitting ensures the model will perform well in real-world scenarios.
+- (D) Overfitting occurs when the model learns the training data too closely, including its noise and outliers.   
+
+
+## Recap
+
+How might one address the issue of underfitting in a machine learning model. 
+
+- (A) Introduce more noise to the training data. 
+- (B) Remove features that might be relevant to the prediction. 
+- (C) Increase the model's complexity, possibly by adding more parameter or features
+- (D) Use a smaller dataset for training. 
+
+
+## Recap 
+- Why do we split the data?
+- What are train/valid/test splits? 
+- What are the benefits of cross-validation?
+- What is overfitting?
+- What’s the fundamental trade-off in supervised machine learning?
+- What is the golden rule of machine learning?
+
+
+
+
+## iClicker 4.1
+
+**iClicker cloud join link: https://join.iclicker.com/VYFJ**
+
+**Select all of the following statements which are TRUE.**
+
+- (A) Analogy-based models find examples from the test set that are most similar to the query example we are predicting.
+- (B) Euclidean distance will always have a non-negative value.
+- (C) With $k$-NN, setting the hyperparameter $k$ to larger values typically reduces training error. 
+- (D) Similar to decision trees, $k$-NNs finds a small set of good features.
+- (E) In $k$-NN, with $k > 1$, the classification of the closest neighbour to the test example always contributes the most to the prediction.
+
+## iClicker 4.2
+Clicker cloud join link: **https://join.iclicker.com/VYFJ**
+
+**Select all of the following statements which are TRUE.**
+
+- (A) $k$-NN may perform poorly in high-dimensional space (say, *d* > 1000). 
+- (B) In sklearn’s SVC classifier, large values of gamma tend to result in higher training score but probably lower validation score. 
+- (C) If we increase both gamma and C, we can't be certain if the model becomes more complex or less complex.
+
+
+## Decision boundaries 
+
+```{python}
+import matplotlib
+import panel as pn
+from panel import widgets
+from panel.interact import interact
+
+pn.extension()
+
+from sklearn.svm import SVC
+import numpy as np
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+from matplotlib.figure import Figure
+
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+from ipywidgets import interact, FloatLogSlider, IntSlider
+import mglearn
+
+
+# Load dataset and preprocessing
+iris = load_iris(as_frame=True)
+iris_df = iris.data
+iris_df['species'] = iris.target
+iris_df = iris_df[iris_df['species'] > 0]
+X, y = iris_df[['sepal length (cm)', 'sepal width (cm)']], iris_df['species']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=123)
+
+
+# Common plot settings
+def plot_results(model, X_train, y_train, title, ax):
+    mglearn.plots.plot_2d_separator(model, X_train.values, fill=True, alpha=0.4, ax=ax);
+    mglearn.discrete_scatter(
+        X_train["sepal length (cm)"], X_train["sepal width (cm)"], y_train, s=6, ax=ax
+    );
+    ax.set_xlabel("sepal length (cm)", fontsize=12);
+    ax.set_ylabel("sepal width (cm)", fontsize=12);
+    train_score = np.round(model.score(X_train.values, y_train), 2)
+    test_score = np.round(model.score(X_test.values, y_test), 2)
+    ax.set_title(
+        f"{title}\n train score = {train_score}\ntest score = {test_score}", fontsize=8
+    );
+    pass
+
+
+# Widgets for SVM, k-NN, and Decision Tree
+c_widget = pn.widgets.FloatSlider(
+    value=1.0, start=1, end=5, step=0.1, name="C (log scale)"
+)
+gamma_widget = pn.widgets.FloatSlider(
+    value=1.0, start=-3, end=5, step=0.1, name="Gamma (log scale)"
+)
+n_neighbors_widget = pn.widgets.IntSlider(
+    start=1, end=40, step=1, value=5, name="n_neighbors"
+)
+max_depth_widget = pn.widgets.IntSlider(
+    start=1, end=20, step=1, value=3, name="max_depth"
+)
+
+
+# The update function to create the plots
+def update_plots(c, gamma=1.0, n_neighbors=5, max_depth=3):
+    c_log = 10**c  # Transform C to logarithmic scale
+    gamma_log = 10**gamma  # Transform Gamma to logarithmic scale
+
+    fig = Figure(figsize=(8, 2))
+    axes = fig.subplots(1, 3)
+
+    models = [
+        SVC(C=c_log, gamma=gamma_log, random_state=42),
+        KNeighborsClassifier(n_neighbors=n_neighbors),
+        DecisionTreeClassifier(max_depth=max_depth, random_state=42),
+    ]
+    titles = [
+        f"SVM (C={c_log}, gamma={gamma_log})",
+        f"k-NN (n_neighbors={n_neighbors})",
+        f"Decision Tree (max_depth={max_depth})",
+    ]
+    for model, title, ax in zip(models, titles, axes):
+        model.fit(X_train.values, y_train)
+        plot_results(model, X_train, y_train, title, ax);
+    # print(c, gamma, n_neighbors, max_depth)
+    return pn.pane.Matplotlib(fig, tight=True);
+
+
+# Bind the function to the panel widgets
+interactive_plot = pn.bind(
+    update_plots,
+    c=c_widget.param.value_throttled,
+    gamma=gamma_widget.param.value_throttled,
+    n_neighbors=n_neighbors_widget.param.value_throttled,
+    max_depth=max_depth_widget.param.value_throttled,
+)
+
+# Layout the widgets and the plot
+dashboard = pn.Column(
+    pn.Row(c_widget, n_neighbors_widget),
+    pn.Row(gamma_widget, max_depth_widget),
+    interactive_plot,
+)
+
+# Display the interactive dashboard
+dashboard
+```
+
+
+## Demo
+
+```{python}
+def star_creator(number):
+    return "⭐" * number
+
+import panel as pn
+
+pn.extension()
+
+slider = pn.widgets.IntSlider(value=5, start=1, end=10)
+interactive_star_creator = pn.bind(star_creator, slider)
+pn.Column(slider, interactive_star_creator)
+```
+
+# [Class demo]()
