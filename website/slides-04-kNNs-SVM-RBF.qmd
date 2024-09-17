@@ -83,133 +83,18 @@ Clicker cloud join link: **https://join.iclicker.com/VYFJ**
 **Select all of the following statements which are TRUE.**
 
 - (A) $k$-NN may perform poorly in high-dimensional space (say, *d* > 1000). 
-- (B) In sklearn’s SVC classifier, large values of gamma tend to result in higher training score but probably lower validation score. 
-- (C) If we increase both gamma and C, we can't be certain if the model becomes more complex or less complex.
+- (B) In sklearn’s SVC classifier, large values of `gamma` tend to result in higher training score but probably lower validation score. 
+- (C) If we increase both `gamma` and `C`, we can't be certain if the model becomes more complex or less complex.
 
 
-## Decision boundaries 
-
-```{python}
-import matplotlib
-import panel as pn
-from panel import widgets
-from panel.interact import interact
-
-pn.extension()
-
-from sklearn.svm import SVC
-import numpy as np
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-
-from matplotlib.figure import Figure
-
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_iris
-from ipywidgets import interact, FloatLogSlider, IntSlider
-import mglearn
+## Intuition of `C` and `gamma` in SVM RBF
+- `C` (Regularization): Controls the trade-off between perfect training accuracy and having a simpler decision boundary. 
+    - High C: Strict, complex boundary (overfitting risk).
+    - Low C: More errors allowed, smoother boundary (generalizes better).
+- `Gamma` (Kernel Width): Controls the influence of individual data points.
+	- High Gamma: Points have local impact, complex boundary.
+	- Low Gamma: Points affect broader areas, smoother boundary.
+- Key trade-off: Proper balance between `C` and `gamma` is crucial for avoiding overfitting or underfitting.
 
 
-# Load dataset and preprocessing
-iris = load_iris(as_frame=True)
-iris_df = iris.data
-iris_df['species'] = iris.target
-iris_df = iris_df[iris_df['species'] > 0]
-X, y = iris_df[['sepal length (cm)', 'sepal width (cm)']], iris_df['species']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=123)
-
-
-# Common plot settings
-def plot_results(model, X_train, y_train, title, ax):
-    mglearn.plots.plot_2d_separator(model, X_train.values, fill=True, alpha=0.4, ax=ax);
-    mglearn.discrete_scatter(
-        X_train["sepal length (cm)"], X_train["sepal width (cm)"], y_train, s=6, ax=ax
-    );
-    ax.set_xlabel("sepal length (cm)", fontsize=12);
-    ax.set_ylabel("sepal width (cm)", fontsize=12);
-    train_score = np.round(model.score(X_train.values, y_train), 2)
-    test_score = np.round(model.score(X_test.values, y_test), 2)
-    ax.set_title(
-        f"{title}\n train score = {train_score}\ntest score = {test_score}", fontsize=8
-    );
-    pass
-
-
-# Widgets for SVM, k-NN, and Decision Tree
-c_widget = pn.widgets.FloatSlider(
-    value=1.0, start=1, end=5, step=0.1, name="C (log scale)"
-)
-gamma_widget = pn.widgets.FloatSlider(
-    value=1.0, start=-3, end=5, step=0.1, name="Gamma (log scale)"
-)
-n_neighbors_widget = pn.widgets.IntSlider(
-    start=1, end=40, step=1, value=5, name="n_neighbors"
-)
-max_depth_widget = pn.widgets.IntSlider(
-    start=1, end=20, step=1, value=3, name="max_depth"
-)
-
-
-# The update function to create the plots
-def update_plots(c, gamma=1.0, n_neighbors=5, max_depth=3):
-    c_log = 10**c  # Transform C to logarithmic scale
-    gamma_log = 10**gamma  # Transform Gamma to logarithmic scale
-
-    fig = Figure(figsize=(8, 2))
-    axes = fig.subplots(1, 3)
-
-    models = [
-        SVC(C=c_log, gamma=gamma_log, random_state=42),
-        KNeighborsClassifier(n_neighbors=n_neighbors),
-        DecisionTreeClassifier(max_depth=max_depth, random_state=42),
-    ]
-    titles = [
-        f"SVM (C={c_log}, gamma={gamma_log})",
-        f"k-NN (n_neighbors={n_neighbors})",
-        f"Decision Tree (max_depth={max_depth})",
-    ]
-    for model, title, ax in zip(models, titles, axes):
-        model.fit(X_train.values, y_train)
-        plot_results(model, X_train, y_train, title, ax);
-    # print(c, gamma, n_neighbors, max_depth)
-    return pn.pane.Matplotlib(fig, tight=True);
-
-
-# Bind the function to the panel widgets
-interactive_plot = pn.bind(
-    update_plots,
-    c=c_widget.param.value_throttled,
-    gamma=gamma_widget.param.value_throttled,
-    n_neighbors=n_neighbors_widget.param.value_throttled,
-    max_depth=max_depth_widget.param.value_throttled,
-)
-
-# Layout the widgets and the plot
-dashboard = pn.Column(
-    pn.Row(c_widget, n_neighbors_widget),
-    pn.Row(gamma_widget, max_depth_widget),
-    interactive_plot,
-)
-
-# Display the interactive dashboard
-dashboard
-```
-
-
-## Demo
-
-```{python}
-def star_creator(number):
-    return "⭐" * number
-
-import panel as pn
-
-pn.extension()
-
-slider = pn.widgets.IntSlider(value=5, start=1, end=10)
-interactive_star_creator = pn.bind(star_creator, slider)
-pn.Column(slider, interactive_star_creator)
-```
-
-# [Class demo]()
+# [Class demo](https://github.com/UBC-CS/cpsc330-2024W1/blob/main/lectures/102-Varada-lectures/class_demos/demo_04-kNNs-SVMs.ipynb)
