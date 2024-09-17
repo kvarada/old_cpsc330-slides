@@ -3,7 +3,7 @@ project:
   output-dir: slides
   resources:
     - "*.html"
-website: 
+website:
   title: "CPSC 330 Section 102 Slides"
   page-navigation: true
   navbar:
@@ -13,22 +13,22 @@ website:
       - href: index.qmd
         text: Home
       - href: slides.qmd
-        text: Slides        
+        text: Slides
   sidebar:
     - id: slides
       contents:
         - slides-01-intro.qmd
         - slides-02-terminology-decision-trees.qmd
         - slides-03-ml-fundamentals.qmd
+        - slides-04-kNNs-SVM-RBF.qmd
 format:
   html:
     theme: [zephyr]
     toc: false
     lightbox: true
-          
+
 editor:
   render-on-save: true
 
 execute:
   freeze: auto
-
