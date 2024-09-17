@@ -795,7 +795,37 @@
     "href": "slides-04-kNNs-SVM-RBF.html#recap-3",
     "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
     "section": "Recap",
-    "text": "Recap\n\nWhy do we split the data?\nWhat are train/valid/test splits?\nWhat are the benefits of cross-validation?\nWhat’s the fundamental trade-off in supervised machine learning?\nWhat is the golden rule of machine learning?",
+    "text": "Recap\n\nWhy do we split the data? What are train/valid/test splits?\nWhat are the benefits of cross-validation?\nWhat’s the fundamental trade-off in supervised machine learning?\nWhat is the golden rule of machine learning?",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#cross-validation",
+    "href": "slides-04-kNNs-SVM-RBF.html#cross-validation",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Cross validation",
+    "text": "Cross validation",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#cross-validation-1",
+    "href": "slides-04-kNNs-SVM-RBF.html#cross-validation-1",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Cross validation",
+    "text": "Cross validation",
+    "crumbs": [
+      "Lecture 4: $k$-nearest neighbours and SVM RBFs"
+    ]
+  },
+  {
+    "objectID": "slides-04-kNNs-SVM-RBF.html#summary-of-train-validation-test-and-deployment-data",
+    "href": "slides-04-kNNs-SVM-RBF.html#summary-of-train-validation-test-and-deployment-data",
+    "title": "Lecture 4: \\(k\\)-nearest neighbours and SVM RBFs",
+    "section": "Summary of train, validation, test, and deployment data",
+    "text": "Summary of train, validation, test, and deployment data\n\n\n\n\nfit\nscore\npredict\n\n\n\n\nTrain\n✔️\n✔️\n✔️\n\n\nValidation\n\n✔️\n✔️\n\n\nTest\n\nonce\nonce\n\n\nDeployment\n\n\n✔️",
     "crumbs": [
       "Lecture 4: $k$-nearest neighbours and SVM RBFs"
     ]
