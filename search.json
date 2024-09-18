@@ -7,291 +7,181 @@
     "text": "import os\nimport sys\nimport pandas as pd\nsys.path.append(os.path.join(os.path.abspath(\".\"), \"code\"))\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\ntoy_happiness_df = pd.read_csv( 'data/toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\n\n\n\n\n\n\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"\n\n\nX\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\n\n\n\n\n\n\n\n\ntest_example = [[0, 160000, 0, 1]]\nprint(model.predict(test_example))\n\n['Unhappy']\n\n\n/Users/kvarada/miniforge3/envs/cpsc330/lib/python3.12/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names\n  warnings.warn(\n\n\n\nfrom plotting_functions import *\n\nX_subset = X[[\"supportive_colleagues\", \"salary\"]]\nmodel = DecisionTreeClassifier(max_depth=1, random_state=1)\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)\n\n\n\n\n\n\n\n\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X_subset.values, y)\nplot_tree_decision_boundary_and_tree(\n    model, X_subset, y, x_label=\"supportive_colleagues\", y_label=\"salary\", fontsize=12, class_names = [\"Happy\", \"Unhappy\"]\n)"
   },
   {
-    "objectID": "slides-03-ml-fundamentals.html#announcements",
-    "href": "slides-03-ml-fundamentals.html#announcements",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "objectID": "slides-05-preprocessing-pipelines.html#announcements",
+    "href": "slides-05-preprocessing-pipelines.html#announcements",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
     "section": "Announcements",
-    "text": "Announcements\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nYou are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.\nGroup submissions are not allowed for this assignment.\n\nAdvice on keeping up with the material\n\nPractice!\nMake sure you run the lecture notes on your laptop and experiment with the code.\nStart early on homework assignments.\n\nIf you are still on the waitlist, it’s your responsibility to keep up with the material and submit assignments.\nLast day to drop without a W standing: Sept 16, 2023",
+    "text": "Announcements\n\nHW1 grades have been posted.\nHomework 1 solutions have been posted on Canvas under Files tab. Please do not share them with anyone or do not post them anywhere.",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 5: Preprocessing and sklearn pipelines"
     ]
   },
   {
-    "objectID": "slides-03-ml-fundamentals.html#recap",
-    "href": "slides-03-ml-fundamentals.html#recap",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "objectID": "slides-05-preprocessing-pipelines.html#recap",
+    "href": "slides-05-preprocessing-pipelines.html#recap",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
     "section": "Recap",
-    "text": "Recap\n\nImportance of generalization in supervised machine learning\nData splitting as a way to approximate generalization error\nTrain, test, validation, deployment data\nOverfitting, underfitting, the fundamental tradeoff, and the golden rule.\nCross-validation",
+    "text": "Recap\n\nDecision trees: Split data into subsets based on feature values to create decision rules\n\\(k\\)-NNs: Classify based on the majority vote from k nearest neighbors\nSVM RBFs: Create a boundary using an RBF kernel to separate classes",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 5: Preprocessing and sklearn pipelines"
     ]
   },
   {
-    "objectID": "slides-03-ml-fundamentals.html#iclicker-3.1",
-    "href": "slides-03-ml-fundamentals.html#iclicker-3.1",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
-    "section": "iClicker 3.1",
-    "text": "iClicker 3.1\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nA decision tree model with no depth (the default max_depth in sklearn) is likely to perform very well on the deployment data.\n\n\nData splitting helps us assess how well our model would generalize.\n\n\nDeployment data is scored only once.\n\n\nValidation data could be used for hyperparameter optimization.\n\n\nIt’s recommended that data be shuffled before splitting it into train and test sets.",
+    "objectID": "slides-05-preprocessing-pipelines.html#recap-1",
+    "href": "slides-05-preprocessing-pipelines.html#recap-1",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Recap",
+    "text": "Recap\n\n\n\n\n\n\n\n\n\nAspect\nDecision Trees\nK-Nearest Neighbors (KNN)\nSupport Vector Machines (SVM) with RBF Kernel\n\n\n\n\nMain hyperparameters\nMax depth, min samples split\nNumber of neighbors (\\(k\\))\nC (regularization), Gamma (RBF kernel width)\n\n\nInterpretability\n\n\n\n\n\nHandling of Non-linearity\n\n\n\n\n\nScalability",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 5: Preprocessing and sklearn pipelines"
     ]
   },
   {
-    "objectID": "slides-03-ml-fundamentals.html#iclicker-3.2",
-    "href": "slides-03-ml-fundamentals.html#iclicker-3.2",
-    "title": "CPSC 330 Lecture 3: ML fundamentals",
-    "section": "iClicker 3.2",
-    "text": "iClicker 3.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\n\\(k\\)-fold cross-validation calls fit \\(k\\) times\n\n\nWe use cross-validation to get a more robust estimate of model performance.\n\n\nIf the mean train accuracy is much higher than the mean cross-validation accuracy it’s likely to be a case of overfitting.\n\n\nThe fundamental tradeoff of ML states that as training error goes down, validation error goes up.\n\n\nA decision stump on a complicated classification problem is likely to underfit.",
+    "objectID": "slides-05-preprocessing-pipelines.html#recap-2",
+    "href": "slides-05-preprocessing-pipelines.html#recap-2",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Recap",
+    "text": "Recap\n\n\n\n\n\n\n\n\n\nAspect\nDecision Trees\nK-Nearest Neighbors (KNN)\nSupport Vector Machines (SVM) with RBF Kernel\n\n\n\n\nSensitivity to Outliers\n\n\n\n\n\nMemory Usage\n\n\n\n\n\nTraining Time\n\n\n\n\n\nPrediction Time\n\n\n\n\n\nMulticlass support",
     "crumbs": [
-      "CPSC 330 Lecture 3: ML fundamentals"
+      "Lecture 5: Preprocessing and sklearn pipelines"
     ]
   },
   {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Overview",
+    "objectID": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.1",
+    "href": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.1",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "(iClicker) Exercise 5.1",
+    "text": "(iClicker) Exercise 5.1\niClicker cloud join link: https://join.iclicker.com/VYFJ\nTake a guess: In your machine learning project, how much time will you typically spend on data preparation and transformation?\n\n\n~80% of the project time\n\n\n~20% of the project time\n\n\n~50% of the project time\n\n\nNone. Most of the time will be spent on model building\n\n\nThe question is adapted from here.",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.2",
+    "href": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.2",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "(iClicker) Exercise 5.2",
+    "text": "(iClicker) Exercise 5.2\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nStandardScaler ensures a fixed range (i.e., minimum and maximum values) for the features.\n\n\nStandardScaler calculates mean and standard deviation for each feature separately.\n\n\nIn general, it’s a good idea to apply scaling on numeric features before training \\(k\\)-NN or SVM RBF models.\n\n\nThe transformed feature values might be hard to interpret for humans.\n\n\nAfter applying SimpleImputer The transformed data has a different shape than the original data.",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.3",
+    "href": "slides-05-preprocessing-pipelines.html#iclicker-exercise-5.3",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "(iClicker) Exercise 5.3",
+    "text": "(iClicker) Exercise 5.3\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nYou can have scaling of numeric features, one-hot encoding of categorical features, and scikit-learn estimator within a single pipeline.\n\n\nOnce you have a scikit-learn pipeline object with an estimator as the last step, you can call fit, predict, and score on it.\n\n\nYou can carry out data splitting within scikit-learn pipeline.\n\n\nWe have to be careful of the order we put each transformation and model in a pipeline.",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#preprocessing-motivation-example",
+    "href": "slides-05-preprocessing-pipelines.html#preprocessing-motivation-example",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Preprocessing motivation: example",
+    "text": "Preprocessing motivation: example\nYou’re trying to find a suitable date based on:\n\nAge (closer to yours is better).\nNumber of Facebook Friends (closer to your social circle is ideal).",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#preprocessing-motivation-example-1",
+    "href": "slides-05-preprocessing-pipelines.html#preprocessing-motivation-example-1",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Preprocessing motivation: example",
+    "text": "Preprocessing motivation: example\n\nYou are 30 years old and have 250 Facebook friends.\n\n\n\n\n\n\n\n\n\n\n\nPerson\nAge\n#FB Friends\nEuclidean Distance Calculation\nDistance\n\n\n\n\nA\n25\n400\n√(5² + 150²)\n150.08\n\n\nB\n27\n300\n√(3² + 50²)\n50.09\n\n\nC\n30\n500\n√(0² + 250²)\n250.00\n\n\nD\n60\n250\n√(30² + 0²)\n30.00\n\n\n\nBased on the distances, the two nearest neighbors (2-NN) are:\n\nPerson D (Distance: 30.00)\nPerson B (Distance: 50.09)\n\nWhat’s the problem here?",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#imputation-fill-the-gaps",
+    "href": "slides-05-preprocessing-pipelines.html#imputation-fill-the-gaps",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Imputation: Fill the gaps! (🟩 🟧 🟦)",
+    "text": "Imputation: Fill the gaps! (🟩 🟧 🟦)\nFill in missing data using a chosen strategy:\n\nMean: Replace missing values with the average of the available data.\nMedian: Use the middle value.\nMost Frequent: Use the most common value (mode).\nKNN Imputation: Fill based on similar neighbors.\n\nExample:\nFill in missing values like filling empty seats in a classroom with the average student.\nfrom sklearn.impute import SimpleImputer\nimputer = SimpleImputer(strategy='mean')\nX_imputed = imputer.fit_transform(X)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#scaling-everything-to-the-same-range",
+    "href": "slides-05-preprocessing-pipelines.html#scaling-everything-to-the-same-range",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Scaling: Everything to the same range! (📉 📈)",
+    "text": "Scaling: Everything to the same range! (📉 📈)\nEnsure all features have a comparable range.\n\nStandardScaler: Mean = 0, Standard Deviation = 1.\nMinMaxScaler: Scales features to a [0, 1] range.\nRobustScaler: Scales features using median and quantiles.\n\nExample:\nRescaling everyone’s height to make basketball players and gymnasts comparable.\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#one-hot-encoding-1-0-0",
+    "href": "slides-05-preprocessing-pipelines.html#one-hot-encoding-1-0-0",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "One-Hot encoding: 🍎 → 1️⃣ 0️⃣ 0️⃣",
+    "text": "One-Hot encoding: 🍎 → 1️⃣ 0️⃣ 0️⃣\nConvert categorical features into binary columns.\n\nCreates new binary columns for each category.\nUseful for handling categorical data in machine learning models.\n\nExample:\nTurn “Apple, Banana, Orange” into binary columns:\n\n\n\nFruit\n🍎\n🍌\n🍊\n\n\n\n\nApple 🍎\n1\n0\n0\n\n\nBanana 🍌\n0\n1\n0\n\n\nOrange 🍊\n0\n0\n1\n\n\n\nfrom sklearn.preprocessing import OneHotEncoder\nencoder = OneHotEncoder()\nX_encoded = encoder.fit_transform(X)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-1",
+    "href": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-1",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️⭐️⭐️ → 1️⃣)",
+    "text": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️⭐️⭐️ → 1️⃣)\nConvert categories into integer values that have a meaningful order.\n\nAssign integers based on order or rank.\nUseful when there is an inherent ranking in the data.\n\nExample:\nTurn “Poor, Average, Good” into 1, 2, 3:\n\n\n\nRating\nOrdinal\n\n\n\n\nPoor\n1\n\n\nAverage\n2\n\n\nGood\n3\n\n\n\nfrom sklearn.preprocessing import OrdinalEncoder\nencoder = OrdinalEncoder()\nX_ordinal = encoder.fit_transform(X)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#transformers",
+    "href": "slides-05-preprocessing-pipelines.html#transformers",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Transformers",
+    "text": "Transformers\n\nAre used to transform or preprocess data.\nImplement the fit and transform methods.\n\nfit(X): Learns parameters from the data.\ntransform(X): Applies the learned transformation to the data.\n\nExamples:\n\nImputation (SimpleImputer): Fills missing values.\nScaling (StandardScaler): Standardizes features.",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#estimators",
+    "href": "slides-05-preprocessing-pipelines.html#estimators",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "Estimators",
+    "text": "Estimators\n\nUsed to make predictions.\nImplement fit and predict methods.\n\nfit(X, y): Learns from labeled data.\npredict(X): Makes predictions on new data.\n\nExamples: DecisionTreeClassifier, SVC, KNeighborsClassifier\n\nfrom sklearn.tree import DecisionTreeClassifier\ntree_clf = DecisionTreeClassifier()",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#the-golden-rule-in-feature-transformations",
+    "href": "slides-05-preprocessing-pipelines.html#the-golden-rule-in-feature-transformations",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "The golden rule in feature transformations",
+    "text": "The golden rule in feature transformations\n\nNever transform the entire dataset at once!\nWhy? It leads to data leakage — using information from the test set in your training process, which can artificially inflate model performance.\nFit transformers like scalers and imputers on the training set only.\nApply the transformations to both the training and test sets separately.\n\nExample:\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "slides-05-preprocessing-pipelines.html#sklearn-pipelines",
+    "href": "slides-05-preprocessing-pipelines.html#sklearn-pipelines",
+    "title": "Lecture 5: Preprocessing and sklearn pipelines",
+    "section": "sklearn Pipelines",
+    "text": "sklearn Pipelines\n\nPipeline is a way to chain multiple steps (e.g., preprocessing + model fitting) into a single workflow.\nSimplify the code and improves readability.\nReduce the risk of data leakage by ensuring proper transformation of the training and test sets.\nAutomatically apply transformations in sequence.\n\nExample:\nChaining a StandardScaler with a KNeighborsClassifier model.\nfrom sklearn.pipeline import make_pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.neighbors import KNeighborsClassifier\n\npipeline = make_pipeline(StandardScaler(), KNeighborsClassifier())\n\npipeline.fit(X_train, y_train)\ny_pred = pipeline.predict(X_test)",
+    "crumbs": [
+      "Lecture 5: Preprocessing and sklearn pipelines"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
     "section": "",
-    "text": "Title\n\n\nDescription\n\n\n\n\n\n\nLecture 1: Introduction to CPSC 330\n\n\nWhat is machine learning, types of machine learning, learning to navigate through the course materials, getting familiar with the course policies\n\n\n\n\nLecture 2: Terminology, Baselines, Decision Trees\n\n\nSupervised machine learning terminology: Features, target, examples, training, parameters and hyperparameters, Decision boundary, classification vs. regression, inference vs. prediction, accuracy vs. error, baselines, intuition of decision trees\n\n\n\n\nCPSC 330 Lecture 3: ML fundamentals\n\n\ngeneralization, data splitting, cross-validation, overfitting, underfitting, the fundamental tradeoff, the golden rule\n\n\n\n\nLecture 4: \\(k\\)-nearest neighbours and SVM RBFs\n\n\nintroduction to KNNs, hyperparameter n_neighbours or \\(k\\), C and gamma hyperparameters of SVM RBF, decision boundaries with different values of hyperparameters.\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#announcements",
-    "href": "slides-02-terminology-decision-trees.html#announcements",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Announcements",
-    "text": "Announcements\n\nThings due this week\n\nHomework 1 (hw1): Due Sept 10 11:59pm\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nThere is some autograding in this homework.\n\nYou can find the tentative due dates for all deliverables here.\nPlease monitor Piazza (especially pinned posts and instructor posts) for announcements.\nI’ll assume that you’ve watched the pre-lecture videos.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#recap-what-is-ml",
-    "href": "slides-02-terminology-decision-trees.html#recap-what-is-ml",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Recap: What is ML?",
-    "text": "Recap: What is ML?\n\nML uses data to build models that find patterns, make predictions, or generate content.\nIt helps computers learn from data to make decisions.\nNo one model works for every situation.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#recap-supervised-learning",
-    "href": "slides-02-terminology-decision-trees.html#recap-supervised-learning",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Recap: Supervised learning",
-    "text": "Recap: Supervised learning\n\nWe wish to find a model function \\(f\\) that relates \\(X\\) to \\(y\\).\nWe use the model function to predict targets of new examples.\n\n\n\n\n\n\nIn the first part of this course, we’ll focus on supervised machine learning.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#framework",
-    "href": "slides-02-terminology-decision-trees.html#framework",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Framework",
-    "text": "Framework\n\nThere are many frameworks to do do machine learning.\nWe’ll mainly be using scikit-learn framework.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#running-example",
-    "href": "slides-02-terminology-decision-trees.html#running-example",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Running example",
-    "text": "Running example\nImagine you’re in the fortunate situation where, after graduating, you have a few job offers and need to decide which one to choose. You want to pick the job that will likely make you the happiest. To help with your decision, you collect data from like-minded people. Here are the first few rows of this toy dataset.\n\ntoy_happiness_df = pd.read_csv(DATA_DIR + 'toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#features-target-example",
-    "href": "slides-02-terminology-decision-trees.html#features-target-example",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Features, target, example",
-    "text": "Features, target, example\n\nWhat are the features \\(X\\)?\n\nfeatures = inputs = predictors = explanatory variables = regressors = independent variables = covariates\n\nWhat’s the target \\(y\\)?\n\ntarget = output = outcome = response variable = dependent variable = labels\n\nCan you think of other relevant features for this problem?\nWhat is an example?",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
-    "href": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Classification vs. Regression",
-    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#prediction-vs.-inference",
-    "href": "slides-02-terminology-decision-trees.html#prediction-vs.-inference",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Prediction vs. Inference",
-    "text": "Prediction vs. Inference\n\nInference is using the model to understand the relationship between the features and the target\n\nWhy certain factors influence happiness?\n\nPrediction is using the model to predict the target value for new examples based on learned patterns.\nOf course these goals are related, and in many situations we need both.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#training",
-    "href": "slides-02-terminology-decision-trees.html#training",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Training",
-    "text": "Training\n\nIn supervised ML, the goal is to learn a function that maps input features (\\(X\\)) to a target (\\(y\\)).\nThe relationship between \\(X\\) and \\(y\\) is often complex, making it difficult to define mathematically.\nWe use algorithms to approximate this complex relationship between \\(X\\) and \\(y\\).\nTraining is the process of applying an algorithm to learn the best function (or model) that maps \\(X\\) to \\(y\\).\nIn this course, I’ll help you develop an intuition for how these models work and demonstrate how to use them in a machine learning pipeline.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#separating-x-and-y",
-    "href": "slides-02-terminology-decision-trees.html#separating-x-and-y",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Separating \\(X\\) and \\(y\\)",
-    "text": "Separating \\(X\\) and \\(y\\)\n\nIn order to train a model we need to separate \\(X\\) and \\(y\\) from the dataframe.\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#baseline",
-    "href": "slides-02-terminology-decision-trees.html#baseline",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Baseline",
-    "text": "Baseline\n\nLet’s try a simplest algorithm of predicting the most popular target!\n\n\nfrom sklearn.dummy import DummyClassifier\nmodel = DummyClassifier(strategy=\"most_frequent\") # Initialize the DummyClassifier to always predict the most frequent class\nmodel.fit(X, y) # Train the model on the feature set X and target variable y\ntoy_happiness_df['dummy_predictions'] = model.predict(X) # Add the predicted values as a new column in the dataframe\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\nHappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\nHappy\n\n\n2\n1\n80000\n1\n0\nHappy\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\nHappy",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#intuition",
-    "href": "slides-02-terminology-decision-trees.html#intuition",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Intuition",
-    "text": "Intuition\n\nDecision trees find the “best” way to split data to make predictions.\nEach split is based on a question, like ‘Are the colleagues supportive?’\nThe goal is to group data by similar outcomes at each step.\nNow, let’s see a decision tree using sklearn.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#decision-tree-with-sklearn",
-    "href": "slides-02-terminology-decision-trees.html#decision-tree-with-sklearn",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Decision tree with sklearn",
-    "text": "Decision tree with sklearn\nLet’s train a simple decision tree on our toy dataset.\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=12);",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#prediction",
-    "href": "slides-02-terminology-decision-trees.html#prediction",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Prediction",
-    "text": "Prediction\n\nGiven a new example, how does a decision tree predict the class of this example?\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
-    "href": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Prediction with sklearn",
-    "text": "Prediction with sklearn\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,\n\n\n\ntest_example = [[1, 60000, 0, 1]]\nprint(\"Model prediction: \", model.predict(test_example))\nplot_tree(model, filled=True, feature_names = X.columns, class_names = [\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\nModel prediction:  ['Unhappy']",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#training-high-level",
-    "href": "slides-02-terminology-decision-trees.html#training-high-level",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Training (high level)",
-    "text": "Training (high level)\n\nHow many possible questions could we ask in this context?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#training-high-level-1",
-    "href": "slides-02-terminology-decision-trees.html#training-high-level-1",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Training (high level)",
-    "text": "Training (high level)\n\nDecision tree learning is a search process to find the “best” tree among many possible ones.\nWe evaluate questions using measures like information gain or the Gini index to find the most effective split.\nAt each step, we aim to split the data into groups with more certainty in their outcomes.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
-    "href": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Parameters vs. Hyperparameters",
-    "text": "Parameters vs. Hyperparameters\n\nParameters\n\nThe questions (features and thresholds) used to split the data at each node.\nExample: salary &lt;= 75000 at the root node\n\n\nHyperparameters\n\nSettings that control tree growth, like max_depth, which limits how deep the tree can go.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
-    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Decision boundary with max_depth=1",
-    "text": "Decision boundary with max_depth=1",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
-    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "Decision boundary with max_depth=2",
-    "text": "Decision boundary with max_depth=2",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
-    "href": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "iClicker 2.2: Supervised vs unsupervised",
-    "text": "iClicker 2.2: Supervised vs unsupervised\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of supervised machine learning\n\n\nFinding groups of similar properties in a real estate data set.\n\n\nPredicting whether someone will have a heart attack or not on the basis of demographic, diet, and clinical measurement.\n\n\nGrouping articles on different topics from different news sources (something like the Google News app).\n\n\nDetecting credit card fraud based on examples of fraudulent and non-fraudulent transactions.\n\n\nGiven some measure of employee performance, identify the key factors which are likely to influence their performance.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
-    "href": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "iClicker 2.3: Classification vs. Regression",
-    "text": "iClicker 2.3: Classification vs. Regression\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of regression problems\n\n\nPredicting the price of a house based on features such as number of bedrooms and the year built.\n\n\nPredicting if a house will sell or not based on features like the price of the house, number of rooms, etc.\n\n\nPredicting percentage grade in CPSC 330 based on past grades.\n\n\nPredicting whether you should bicycle tomorrow or not based on the weather forecast.\n\n\nPredicting appropriate thermostat temperature based on the wind speed and the number of people in a room.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
-    "href": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "iClicker 2.5: Baselines and Decision trees",
-    "text": "iClicker 2.5: Baselines and Decision trees\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nChange in features (i.e., binarizing features above) would change DummyClassifier predictions.\n\n\npredict takes only X as argument whereas fit and score take both X and y as arguments.\n\n\nFor the decision tree algorithm to work, the feature values must be binary.\n\n\nThe prediction in a decision tree works by routing the example from the root to the leaf.",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
-  },
-  {
-    "objectID": "slides-02-terminology-decision-trees.html#hw2-worksheet-portion",
-    "href": "slides-02-terminology-decision-trees.html#hw2-worksheet-portion",
-    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
-    "section": "HW2 Worksheet portion",
-    "text": "HW2 Worksheet portion",
-    "crumbs": [
-      "Lecture 2: Terminology, Baselines, Decision Trees"
-    ]
+    "text": "Welcome to CPSC330! Here, you’ll find slides for CPSC 330 Section 102. These slides are based on the notes present here.\n\nClass times 🕘 11 am to 12:20 pm\nWhere? 📍 West Mall Swing Space (SWNG) - 222, 2175 West Mall, Vancouver, BC V6T 1Z4"
   },
   {
     "objectID": "slides-01-intro.html#learning-outcomes",
@@ -734,11 +624,291 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome",
+    "objectID": "slides-02-terminology-decision-trees.html#announcements",
+    "href": "slides-02-terminology-decision-trees.html#announcements",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Announcements",
+    "text": "Announcements\n\nThings due this week\n\nHomework 1 (hw1): Due Sept 10 11:59pm\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nThere is some autograding in this homework.\n\nYou can find the tentative due dates for all deliverables here.\nPlease monitor Piazza (especially pinned posts and instructor posts) for announcements.\nI’ll assume that you’ve watched the pre-lecture videos.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#recap-what-is-ml",
+    "href": "slides-02-terminology-decision-trees.html#recap-what-is-ml",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Recap: What is ML?",
+    "text": "Recap: What is ML?\n\nML uses data to build models that find patterns, make predictions, or generate content.\nIt helps computers learn from data to make decisions.\nNo one model works for every situation.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#recap-supervised-learning",
+    "href": "slides-02-terminology-decision-trees.html#recap-supervised-learning",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Recap: Supervised learning",
+    "text": "Recap: Supervised learning\n\nWe wish to find a model function \\(f\\) that relates \\(X\\) to \\(y\\).\nWe use the model function to predict targets of new examples.\n\n\n\n\n\n\nIn the first part of this course, we’ll focus on supervised machine learning.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#framework",
+    "href": "slides-02-terminology-decision-trees.html#framework",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Framework",
+    "text": "Framework\n\nThere are many frameworks to do do machine learning.\nWe’ll mainly be using scikit-learn framework.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#running-example",
+    "href": "slides-02-terminology-decision-trees.html#running-example",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Running example",
+    "text": "Running example\nImagine you’re in the fortunate situation where, after graduating, you have a few job offers and need to decide which one to choose. You want to pick the job that will likely make you the happiest. To help with your decision, you collect data from like-minded people. Here are the first few rows of this toy dataset.\n\ntoy_happiness_df = pd.read_csv(DATA_DIR + 'toy_job_happiness.csv')\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#features-target-example",
+    "href": "slides-02-terminology-decision-trees.html#features-target-example",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Features, target, example",
+    "text": "Features, target, example\n\nWhat are the features \\(X\\)?\n\nfeatures = inputs = predictors = explanatory variables = regressors = independent variables = covariates\n\nWhat’s the target \\(y\\)?\n\ntarget = output = outcome = response variable = dependent variable = labels\n\nCan you think of other relevant features for this problem?\nWhat is an example?",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
+    "href": "slides-02-terminology-decision-trees.html#classification-vs.-regression",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Classification vs. Regression",
+    "text": "Classification vs. Regression\n\nIs this a classification problem or a regression problem?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\n\n\n2\n1\n80000\n1\n0\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#prediction-vs.-inference",
+    "href": "slides-02-terminology-decision-trees.html#prediction-vs.-inference",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Prediction vs. Inference",
+    "text": "Prediction vs. Inference\n\nInference is using the model to understand the relationship between the features and the target\n\nWhy certain factors influence happiness?\n\nPrediction is using the model to predict the target value for new examples based on learned patterns.\nOf course these goals are related, and in many situations we need both.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#training",
+    "href": "slides-02-terminology-decision-trees.html#training",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Training",
+    "text": "Training\n\nIn supervised ML, the goal is to learn a function that maps input features (\\(X\\)) to a target (\\(y\\)).\nThe relationship between \\(X\\) and \\(y\\) is often complex, making it difficult to define mathematically.\nWe use algorithms to approximate this complex relationship between \\(X\\) and \\(y\\).\nTraining is the process of applying an algorithm to learn the best function (or model) that maps \\(X\\) to \\(y\\).\nIn this course, I’ll help you develop an intuition for how these models work and demonstrate how to use them in a machine learning pipeline.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#separating-x-and-y",
+    "href": "slides-02-terminology-decision-trees.html#separating-x-and-y",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Separating \\(X\\) and \\(y\\)",
+    "text": "Separating \\(X\\) and \\(y\\)\n\nIn order to train a model we need to separate \\(X\\) and \\(y\\) from the dataframe.\n\n\nX = toy_happiness_df.drop(columns=[\"happy?\"]) # Extract the feature set by removing the target column \"happy?\"\ny = toy_happiness_df[\"happy?\"] # Extract the target variable \"happy?\"",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#baseline",
+    "href": "slides-02-terminology-decision-trees.html#baseline",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Baseline",
+    "text": "Baseline\n\nLet’s try a simplest algorithm of predicting the most popular target!\n\n\nfrom sklearn.dummy import DummyClassifier\nmodel = DummyClassifier(strategy=\"most_frequent\") # Initialize the DummyClassifier to always predict the most frequent class\nmodel.fit(X, y) # Train the model on the feature set X and target variable y\ntoy_happiness_df['dummy_predictions'] = model.predict(X) # Add the predicted values as a new column in the dataframe\ntoy_happiness_df\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\nhappy?\ndummy_predictions\n\n\n\n\n0\n0\n70000\n0\n1\nUnhappy\nHappy\n\n\n1\n1\n60000\n0\n0\nUnhappy\nHappy\n\n\n2\n1\n80000\n1\n0\nHappy\nHappy\n\n\n3\n1\n110000\n0\n1\nHappy\nHappy\n\n\n4\n1\n120000\n1\n0\nHappy\nHappy\n\n\n5\n1\n150000\n1\n1\nHappy\nHappy\n\n\n6\n0\n150000\n1\n0\nUnhappy\nHappy",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#intuition",
+    "href": "slides-02-terminology-decision-trees.html#intuition",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Intuition",
+    "text": "Intuition\n\nDecision trees find the “best” way to split data to make predictions.\nEach split is based on a question, like ‘Are the colleagues supportive?’\nThe goal is to group data by similar outcomes at each step.\nNow, let’s see a decision tree using sklearn.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#decision-tree-with-sklearn",
+    "href": "slides-02-terminology-decision-trees.html#decision-tree-with-sklearn",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Decision tree with sklearn",
+    "text": "Decision tree with sklearn\nLet’s train a simple decision tree on our toy dataset.\n\nfrom sklearn.tree import DecisionTreeClassifier # import the classifier\nfrom sklearn.tree import plot_tree\n\nmodel = DecisionTreeClassifier(max_depth=2, random_state=1) # Create a class object\nmodel.fit(X, y)\nplot_tree(model, filled=True, feature_names = X.columns, class_names=[\"Happy\", \"Unhappy\"], impurity = False, fontsize=12);",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#prediction",
+    "href": "slides-02-terminology-decision-trees.html#prediction",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Prediction",
+    "text": "Prediction\n\nGiven a new example, how does a decision tree predict the class of this example?\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
+    "href": "slides-02-terminology-decision-trees.html#prediction-with-sklearn",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Prediction with sklearn",
+    "text": "Prediction with sklearn\n\nWhat would be the prediction for the example below using the tree above?\n\nsupportive_colleagues = 1, salary = 60000, coffee_machine = 0, vegan_boss = 1,\n\n\n\ntest_example = [[1, 60000, 0, 1]]\nprint(\"Model prediction: \", model.predict(test_example))\nplot_tree(model, filled=True, feature_names = X.columns, class_names = [\"Happy\", \"Unhappy\"], impurity = False, fontsize=9);\n\nModel prediction:  ['Unhappy']",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#training-high-level",
+    "href": "slides-02-terminology-decision-trees.html#training-high-level",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Training (high level)",
+    "text": "Training (high level)\n\nHow many possible questions could we ask in this context?\n\n\n\n\n\n\n\n\n\n\nsupportive_colleagues\nsalary\nfree_coffee\nboss_vegan\n\n\n\n\n0\n0\n70000\n0\n1\n\n\n1\n1\n60000\n0\n0\n\n\n2\n1\n80000\n1\n0\n\n\n3\n1\n110000\n0\n1\n\n\n4\n1\n120000\n1\n0\n\n\n5\n1\n150000\n1\n1\n\n\n6\n0\n150000\n1\n0",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#training-high-level-1",
+    "href": "slides-02-terminology-decision-trees.html#training-high-level-1",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Training (high level)",
+    "text": "Training (high level)\n\nDecision tree learning is a search process to find the “best” tree among many possible ones.\nWe evaluate questions using measures like information gain or the Gini index to find the most effective split.\nAt each step, we aim to split the data into groups with more certainty in their outcomes.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
+    "href": "slides-02-terminology-decision-trees.html#parameters-vs.-hyperparameters",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Parameters vs. Hyperparameters",
+    "text": "Parameters vs. Hyperparameters\n\nParameters\n\nThe questions (features and thresholds) used to split the data at each node.\nExample: salary &lt;= 75000 at the root node\n\n\nHyperparameters\n\nSettings that control tree growth, like max_depth, which limits how deep the tree can go.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
+    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth1",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Decision boundary with max_depth=1",
+    "text": "Decision boundary with max_depth=1",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
+    "href": "slides-02-terminology-decision-trees.html#decision-boundary-with-max_depth2",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "Decision boundary with max_depth=2",
+    "text": "Decision boundary with max_depth=2",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.2-supervised-vs-unsupervised",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.2: Supervised vs unsupervised",
+    "text": "iClicker 2.2: Supervised vs unsupervised\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of supervised machine learning\n\n\nFinding groups of similar properties in a real estate data set.\n\n\nPredicting whether someone will have a heart attack or not on the basis of demographic, diet, and clinical measurement.\n\n\nGrouping articles on different topics from different news sources (something like the Google News app).\n\n\nDetecting credit card fraud based on examples of fraudulent and non-fraudulent transactions.\n\n\nGiven some measure of employee performance, identify the key factors which are likely to influence their performance.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.3-classification-vs.-regression",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.3: Classification vs. Regression",
+    "text": "iClicker 2.3: Classification vs. Regression\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are examples of regression problems\n\n\nPredicting the price of a house based on features such as number of bedrooms and the year built.\n\n\nPredicting if a house will sell or not based on features like the price of the house, number of rooms, etc.\n\n\nPredicting percentage grade in CPSC 330 based on past grades.\n\n\nPredicting whether you should bicycle tomorrow or not based on the weather forecast.\n\n\nPredicting appropriate thermostat temperature based on the wind speed and the number of people in a room.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
+    "href": "slides-02-terminology-decision-trees.html#iclicker-2.5-baselines-and-decision-trees",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "iClicker 2.5: Baselines and Decision trees",
+    "text": "iClicker 2.5: Baselines and Decision trees\niClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nChange in features (i.e., binarizing features above) would change DummyClassifier predictions.\n\n\npredict takes only X as argument whereas fit and score take both X and y as arguments.\n\n\nFor the decision tree algorithm to work, the feature values must be binary.\n\n\nThe prediction in a decision tree works by routing the example from the root to the leaf.",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides-02-terminology-decision-trees.html#hw2-worksheet-portion",
+    "href": "slides-02-terminology-decision-trees.html#hw2-worksheet-portion",
+    "title": "Lecture 2: Terminology, Baselines, Decision Trees",
+    "section": "HW2 Worksheet portion",
+    "text": "HW2 Worksheet portion",
+    "crumbs": [
+      "Lecture 2: Terminology, Baselines, Decision Trees"
+    ]
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Overview",
     "section": "",
-    "text": "Welcome to CPSC330! Here, you’ll find slides for CPSC 330 Section 102. These slides are based on the notes present here.\n\nClass times 🕘 11 am to 12:20 pm\nWhere? 📍 West Mall Swing Space (SWNG) - 222, 2175 West Mall, Vancouver, BC V6T 1Z4"
+    "text": "Title\n\n\nDescription\n\n\n\n\n\n\nLecture 1: Introduction to CPSC 330\n\n\nWhat is machine learning, types of machine learning, learning to navigate through the course materials, getting familiar with the course policies\n\n\n\n\nLecture 2: Terminology, Baselines, Decision Trees\n\n\nSupervised machine learning terminology: Features, target, examples, training, parameters and hyperparameters, Decision boundary, classification vs. regression, inference vs. prediction, accuracy vs. error, baselines, intuition of decision trees\n\n\n\n\nCPSC 330 Lecture 3: ML fundamentals\n\n\ngeneralization, data splitting, cross-validation, overfitting, underfitting, the fundamental tradeoff, the golden rule\n\n\n\n\nLecture 4: \\(k\\)-nearest neighbours and SVM RBFs\n\n\nintroduction to KNNs, hyperparameter n_neighbours or \\(k\\), C and gamma hyperparameters of SVM RBF, decision boundaries with different values of hyperparameters.\n\n\n\n\nLecture 5: Preprocessing and sklearn pipelines\n\n\nintroduction to KNNs, hyperparameter n_neighbours or \\(k\\), C and gamma hyperparameters of SVM RBF, decision boundaries with different values of hyperparameters.\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "slides-03-ml-fundamentals.html#announcements",
+    "href": "slides-03-ml-fundamentals.html#announcements",
+    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "section": "Announcements",
+    "text": "Announcements\n\nHomework 2 (hw2) has been released (Due: Sept 16, 11:59pm)\n\nYou are welcome to broadly discuss it with your classmates but final answers and submissions must be your own.\nGroup submissions are not allowed for this assignment.\n\nAdvice on keeping up with the material\n\nPractice!\nMake sure you run the lecture notes on your laptop and experiment with the code.\nStart early on homework assignments.\n\nIf you are still on the waitlist, it’s your responsibility to keep up with the material and submit assignments.\nLast day to drop without a W standing: Sept 16, 2023",
+    "crumbs": [
+      "CPSC 330 Lecture 3: ML fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides-03-ml-fundamentals.html#recap",
+    "href": "slides-03-ml-fundamentals.html#recap",
+    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "section": "Recap",
+    "text": "Recap\n\nImportance of generalization in supervised machine learning\nData splitting as a way to approximate generalization error\nTrain, test, validation, deployment data\nOverfitting, underfitting, the fundamental tradeoff, and the golden rule.\nCross-validation",
+    "crumbs": [
+      "CPSC 330 Lecture 3: ML fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides-03-ml-fundamentals.html#iclicker-3.1",
+    "href": "slides-03-ml-fundamentals.html#iclicker-3.1",
+    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "section": "iClicker 3.1",
+    "text": "iClicker 3.1\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\nA decision tree model with no depth (the default max_depth in sklearn) is likely to perform very well on the deployment data.\n\n\nData splitting helps us assess how well our model would generalize.\n\n\nDeployment data is scored only once.\n\n\nValidation data could be used for hyperparameter optimization.\n\n\nIt’s recommended that data be shuffled before splitting it into train and test sets.",
+    "crumbs": [
+      "CPSC 330 Lecture 3: ML fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides-03-ml-fundamentals.html#iclicker-3.2",
+    "href": "slides-03-ml-fundamentals.html#iclicker-3.2",
+    "title": "CPSC 330 Lecture 3: ML fundamentals",
+    "section": "iClicker 3.2",
+    "text": "iClicker 3.2\nClicker cloud join link: https://join.iclicker.com/VYFJ\nSelect all of the following statements which are TRUE.\n\n\n\\(k\\)-fold cross-validation calls fit \\(k\\) times\n\n\nWe use cross-validation to get a more robust estimate of model performance.\n\n\nIf the mean train accuracy is much higher than the mean cross-validation accuracy it’s likely to be a case of overfitting.\n\n\nThe fundamental tradeoff of ML states that as training error goes down, validation error goes up.\n\n\nA decision stump on a complicated classification problem is likely to underfit.",
+    "crumbs": [
+      "CPSC 330 Lecture 3: ML fundamentals"
+    ]
   },
   {
     "objectID": "slides-04-kNNs-SVM-RBF.html#announcements",
