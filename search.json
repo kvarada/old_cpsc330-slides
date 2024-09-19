@@ -127,11 +127,11 @@
     ]
   },
   {
-    "objectID": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-1",
-    "href": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-1",
+    "objectID": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-3",
+    "href": "slides-05-preprocessing-pipelines.html#ordinal-encoding-ranking-matters-3",
     "title": "Lecture 5: Preprocessing and sklearn pipelines",
-    "section": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️⭐️⭐️ → 1️⃣)",
-    "text": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️⭐️⭐️ → 1️⃣)\nConvert categories into integer values that have a meaningful order.\n\nAssign integers based on order or rank.\nUseful when there is an inherent ranking in the data.\n\nExample:\nTurn “Poor, Average, Good” into 1, 2, 3:\n\n\n\nRating\nOrdinal\n\n\n\n\nPoor\n1\n\n\nAverage\n2\n\n\nGood\n3\n\n\n\nfrom sklearn.preprocessing import OrdinalEncoder\nencoder = OrdinalEncoder()\nX_ordinal = encoder.fit_transform(X)",
+    "section": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️ → 3️⃣)",
+    "text": "Ordinal encoding: Ranking matters! (⭐️⭐️⭐️ → 3️⃣)\nConvert categories into integer values that have a meaningful order.\n\nAssign integers based on order or rank.\nUseful when there is an inherent ranking in the data.\n\nExample:\nTurn “Poor, Average, Good” into 1, 2, 3:\n\n\n\nRating\nOrdinal\n\n\n\n\nPoor\n1\n\n\nAverage\n2\n\n\nGood\n3\n\n\n\nfrom sklearn.preprocessing import OrdinalEncoder\nencoder = OrdinalEncoder()\nX_ordinal = encoder.fit_transform(X)",
     "crumbs": [
       "Lecture 5: Preprocessing and sklearn pipelines"
     ]
