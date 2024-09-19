@@ -101,7 +101,7 @@
     "href": "slides-05-preprocessing-pipelines.html#imputation-fill-the-gaps",
     "title": "Lecture 5: Preprocessing and sklearn pipelines",
     "section": "Imputation: Fill the gaps! (🟩 🟧 🟦)",
-    "text": "Imputation: Fill the gaps! (🟩 🟧 🟦)\nFill in missing data using a chosen strategy:\n\nMean: Replace missing values with the average of the available data.\nMedian: Use the middle value.\nMost Frequent: Use the most common value (mode).\nKNN Imputation: Fill based on similar neighbors.\n\nExample:\nFill in missing values like filling empty seats in a classroom with the average student.\nfrom sklearn.impute import SimpleImputer\nimputer = SimpleImputer(strategy='mean')\nX_imputed = imputer.fit_transform(X)",
+    "text": "Imputation: Fill the gaps! (🟩 🟧 🟦)\nFill in missing data using a chosen strategy:\n\nMean: Replace missing values with the average of the available data.\nMedian: Use the middle value.\nMost Frequent: Use the most common value (mode).\nKNN Imputation: Fill based on similar neighbors.\n\nExample:\nImputation is like filling in your average or median or most frequent grade for an assessment you missed.\nfrom sklearn.impute import SimpleImputer\nimputer = SimpleImputer(strategy='mean')\nX_imputed = imputer.fit_transform(X)",
     "crumbs": [
       "Lecture 5: Preprocessing and sklearn pipelines"
     ]
@@ -111,7 +111,7 @@
     "href": "slides-05-preprocessing-pipelines.html#scaling-everything-to-the-same-range",
     "title": "Lecture 5: Preprocessing and sklearn pipelines",
     "section": "Scaling: Everything to the same range! (📉 📈)",
-    "text": "Scaling: Everything to the same range! (📉 📈)\nEnsure all features have a comparable range.\n\nStandardScaler: Mean = 0, Standard Deviation = 1.\nMinMaxScaler: Scales features to a [0, 1] range.\nRobustScaler: Scales features using median and quantiles.\n\nExample:\nRescaling everyone’s height to make basketball players and gymnasts comparable.\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)",
+    "text": "Scaling: Everything to the same range! (📉 📈)\nEnsure all features have a comparable range.\n\nStandardScaler: Mean = 0, Standard Deviation = 1.\n\nExample:\nScaling is like adjusting the number of everyone’s Facebook friends so that both the number of friends and their age are on a comparable scale. This way, one feature doesn’t dominate the other when making comparisons.\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)",
     "crumbs": [
       "Lecture 5: Preprocessing and sklearn pipelines"
     ]
@@ -151,7 +151,7 @@
     "href": "slides-05-preprocessing-pipelines.html#estimators",
     "title": "Lecture 5: Preprocessing and sklearn pipelines",
     "section": "Estimators",
-    "text": "Estimators\n\nUsed to make predictions.\nImplement fit and predict methods.\n\nfit(X, y): Learns from labeled data.\npredict(X): Makes predictions on new data.\n\nExamples: DecisionTreeClassifier, SVC, KNeighborsClassifier\n\nfrom sklearn.tree import DecisionTreeClassifier\ntree_clf = DecisionTreeClassifier()",
+    "text": "Estimators\n\nUsed to make predictions.\nImplement fit and predict methods.\n\nfit(X, y): Learns from labeled data.\npredict(X): Makes predictions on new data.\n\nExamples: DecisionTreeClassifier, SVC, KNeighborsClassifier",
     "crumbs": [
       "Lecture 5: Preprocessing and sklearn pipelines"
     ]
