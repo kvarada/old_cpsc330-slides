@@ -1218,13 +1218,18 @@ margin-right: 0; }
 <ul>
 <li>HW1 grades have been posted.</li>
 <li>Homework 1 solutions have been posted on Canvas under Files tab. Please do not share them with anyone or do not post them anywhere.</li>
+<li>Syllabus quiz due date is September 19th, 11:59 pm.</li>
+<li>Homework 3 (hw3) has been released (Due: Oct 1st, 11:59 pm)
+<ul>
+<li>You can work in pairs for this assignment.</li>
+</ul></li>
 </ul>
 </section>
 <section id="recap" class="slide level2 center">
 <h2>Recap</h2>
 <ul>
 <li>Decision trees: Split data into subsets based on feature values to create decision rules</li>
-<li><span class="math inline">\(k\)</span>-NNs: Classify based on the majority vote from k nearest neighbors</li>
+<li><span class="math inline">\(k\)</span>-NNs: Classify based on the majority vote from <span class="math inline">\(k\)</span> nearest neighbors</li>
 <li>SVM RBFs: Create a boundary using an RBF kernel to separate classes</li>
 </ul>
 </section>
@@ -1259,7 +1264,7 @@ margin-right: 0; }
 <td></td>
 </tr>
 <tr class="odd">
-<td><strong>Handling of Non-linearity</strong></td>
+<td><strong>Handling of non-linearity</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1292,25 +1297,25 @@ margin-right: 0; }
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Sensitivity to Outliers</strong></td>
+<td><strong>Sensitivity to outliers</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><strong>Memory Usage</strong></td>
+<td><strong>Memory usage</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><strong>Training Time</strong></td>
+<td><strong>Training time</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><strong>Prediction Time</strong></td>
+<td><strong>Prediction time</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1350,10 +1355,10 @@ margin-right: 0; }
 <p>Select all of the following statements which are TRUE.</p>
 <ul>
 <li><ol type="A">
-<li>StandardScaler ensures a fixed range (i.e., minimum and maximum values) for the features.</li>
+<li><code>StandardScaler</code> ensures a fixed range (i.e., minimum and maximum values) for the features.</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>StandardScaler calculates mean and standard deviation for each feature separately.</li>
+<li><code>StandardScaler</code> calculates mean and standard deviation for each feature separately.</li>
 </ol></li>
 <li><ol start="3" type="A">
 <li>In general, it’s a good idea to apply scaling on numeric features before training <span class="math inline">\(k\)</span>-NN or SVM RBF models.</li>
@@ -1361,8 +1366,10 @@ margin-right: 0; }
 <li><ol start="4" type="A">
 <li>The transformed feature values might be hard to interpret for humans.</li>
 </ol></li>
+<li><ol start="5" type="A">
+<li>After applying <code>SimpleImputer</code> The transformed data has a different shape than the original data.</li>
+</ol></li>
 </ul>
-<p>After applying SimpleImputer The transformed data has a different shape than the original data.</p>
 </section>
 <section id="iclicker-exercise-5.3" class="slide level2 center">
 <h2>(iClicker) Exercise 5.3</h2>
@@ -1373,10 +1380,10 @@ margin-right: 0; }
 <li>You can have scaling of numeric features, one-hot encoding of categorical features, and scikit-learn estimator within a single pipeline.</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>Once you have a scikit-learn pipeline object with an estimator as the last step, you can call fit, predict, and score on it.</li>
+<li>Once you have a <code>scikit-learn</code> pipeline object with an estimator as the last step, you can call <code>fit</code>, <code>predict</code>, and <code>score</code> on it.</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>You can carry out data splitting within scikit-learn pipeline.</li>
+<li>You can carry out data splitting within <code>scikit-learn</code> pipeline.</li>
 </ol></li>
 <li><ol start="4" type="A">
 <li>We have to be careful of the order we put each transformation and model in a pipeline.</li>
